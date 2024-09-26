@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,22 +39,29 @@ public class EnderecoService {
 
 
 
-    public Endereco requestToEndereco(EnderecoRequest enderecoRequest, ViaCepResponse viaCepResponse) {
+    public Endereco requestToEndereco(EnderecoRequest enderecoRequest,  Future<ViaCepResponse> futureViaCepResponse) {
+        ViaCepResponse viaCepResponse;
+        try {
+            viaCepResponse = futureViaCepResponse.get(); // This will block until the task is complete
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Failed to get ViaCepResponse", e);
+        }
+
 
         // Formatar para primeira letra maiúscula
-        String logradouro = (viaCepResponse.logradouro() != null && !viaCepResponse.logradouro().isEmpty())
-                ? capitalizeWords(viaCepResponse.logradouro())
+        String logradouro = (futureViaCepResponse.resultNow().logradouro() != null && !futureViaCepResponse.resultNow().logradouro().isEmpty())
+                ? capitalizeWords(futureViaCepResponse.resultNow().logradouro())
                 : (enderecoRequest.logradouro() != null && !enderecoRequest.logradouro().isEmpty())
                 ? capitalizeWords(enderecoRequest.logradouro())
                 : "Logradouro Padrão"; // Defina um valor padrão ou tratamento para null
 
 
         // Buscar ou criar bairro
-        String nomeBairroParaBusca = (viaCepResponse.bairro() != null) ? viaCepResponse.bairro() : enderecoRequest.bairro();
+        String nomeBairroParaBusca = (futureViaCepResponse.resultNow().bairro() != null) ? futureViaCepResponse.resultNow().bairro() : enderecoRequest.bairro();
         Bairro bairroEntity = bairroRepository.findByNomeBairro(nomeBairroParaBusca)
                 .orElseGet(() -> {
-                    String nomeBairro = (viaCepResponse.bairro() != null && !viaCepResponse.bairro().isEmpty())
-                            ? viaCepResponse.bairro()
+                    String nomeBairro = (futureViaCepResponse.resultNow().bairro() != null && !futureViaCepResponse.resultNow().bairro().isEmpty())
+                            ? futureViaCepResponse.resultNow().bairro()
                             : (enderecoRequest.bairro() != null && !enderecoRequest.bairro().isEmpty())
                             ? capitalizeWords(enderecoRequest.bairro())
                             : "Bairro Padrão"; // Defina um valor padrão ou tratamento para null
@@ -61,28 +70,27 @@ public class EnderecoService {
                 });
 
 
-
-
         // Buscar ou criar cidade
-        Cidade cidadeEntity = cidadeRepository.findByNomeCidade(viaCepResponse.localidade())
+        Cidade cidadeEntity = cidadeRepository.findByNomeCidade(futureViaCepResponse.resultNow().localidade())
                 .orElseGet(() -> {
-                    Cidade novaCidade = new Cidade(viaCepResponse.localidade() != null ? viaCepResponse.localidade() : capitalizeWords(enderecoRequest.cidade()));
+                    Cidade novaCidade = new Cidade(futureViaCepResponse.resultNow().localidade() != null
+                            ? futureViaCepResponse.resultNow().localidade() : capitalizeWords(enderecoRequest.cidade()));
                     return cidadeRepository.save(novaCidade); // Salva a nova Cidade
                 });
 
 
         // Buscar ou criar estado
-        Estado estadoEntity = estadoRepository.findByNomeEstado(viaCepResponse.estado())
+        Estado estadoEntity = estadoRepository.findByNomeEstado(futureViaCepResponse.resultNow().estado())
                 .orElseGet(() -> {
-                    Estado novoEstado = new Estado(viaCepResponse.estado() != null ? viaCepResponse.estado() : capitalizeWords(enderecoRequest.estado()));
+                    Estado novoEstado = new Estado(futureViaCepResponse.resultNow().estado() != null ? futureViaCepResponse.resultNow().estado() : capitalizeWords(enderecoRequest.estado()));
                     return estadoRepository.save(novoEstado); // Salva o novo Estado
                 });
 
 
         // Buscar ou criar regiao
-        Regiao regiaoEntity = regiaoRepository.findByNomeRegiao(viaCepResponse.regiao())
+        Regiao regiaoEntity = regiaoRepository.findByNomeRegiao(futureViaCepResponse.resultNow().regiao())
                 .orElseGet(() -> {
-                    Regiao novaRegiao = new Regiao(viaCepResponse.regiao() != null ? viaCepResponse.regiao() : capitalizeWords(enderecoRequest.regiao()));
+                    Regiao novaRegiao = new Regiao(futureViaCepResponse.resultNow().regiao() != null ? futureViaCepResponse.resultNow().regiao() : capitalizeWords(enderecoRequest.regiao()));
                     return regiaoRepository.save(novaRegiao); // Salva a nova Região
                 });
 
@@ -93,7 +101,7 @@ public class EnderecoService {
 
         // Criar o objeto Endereco
         Endereco endereco = new Endereco();
-        endereco.setCep(viaCepResponse.cep());
+        endereco.setCep(futureViaCepResponse.resultNow().cep());
         endereco.setLogradouro(logradouro);
         endereco.setBairro(bairroEntity);
         endereco.setComplemento(enderecoRequest.complemento());

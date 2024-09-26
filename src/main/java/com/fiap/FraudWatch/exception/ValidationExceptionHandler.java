@@ -30,4 +30,9 @@ public class ValidationExceptionHandler {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
+    @ExceptionHandler(CepNaoEncontradoException.class)
+    public ResponseEntity<String> handleCepNaoEncontradoException(CepNaoEncontradoException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
 }

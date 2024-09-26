@@ -3,21 +3,15 @@ package com.fiap.FraudWatch.service;
 import com.fiap.FraudWatch.dto.enderecoDto.EnderecoRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponse;
-import com.fiap.FraudWatch.dto.viaCepDto.ViaCepResponse;
 import com.fiap.FraudWatch.exception.CpfJaCadastradoException;
 import com.fiap.FraudWatch.exception.EmailJaCadastradoException;
-import com.fiap.FraudWatch.model.Endereco;
 import com.fiap.FraudWatch.model.TipoUsuario;
 import com.fiap.FraudWatch.model.Usuario;
-import com.fiap.FraudWatch.repository.EnderecoRepository;
 import com.fiap.FraudWatch.repository.TipoUsuarioRepository;
 import com.fiap.FraudWatch.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -59,7 +53,7 @@ public class UsuarioService {
         TipoUsuario tipoUsuario = tipoUsuarioRepository.findById(usuarioRequest.tipoUsuarioid())
                 .orElseThrow(() -> new IllegalArgumentException("Tipo de usuário não encontrado"));
         usuario.setTipoUsuario(tipoUsuario);
-        usuario.setEndereco(enderecoService.requestToEndereco(enderecoRequest, enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep())));
+        usuario.setEndereco(enderecoService.requestToEndereco(enderecoRequest, enderecoServiceAsync.obterEnderecoPorCepAsync(enderecoRequest.cep())));
         return usuario;
 
     }
@@ -110,7 +104,7 @@ public class UsuarioService {
         usuarioExistente.setTipoUsuario(tipoUsuario);
 
         // Atualizar o endereço
-        usuarioExistente.setEndereco(enderecoService.requestToEndereco(enderecoRequest, enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep())));
+        usuarioExistente.setEndereco(enderecoService.requestToEndereco(enderecoRequest, enderecoServiceAsync.obterEnderecoPorCepAsync(enderecoRequest.cep())));
 
         // O campo DataCadastro não será alterado
 

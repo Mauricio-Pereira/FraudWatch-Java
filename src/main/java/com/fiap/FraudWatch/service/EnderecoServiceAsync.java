@@ -1,6 +1,7 @@
 package com.fiap.FraudWatch.service;
 
 import com.fiap.FraudWatch.dto.viaCepDto.ViaCepResponse;
+import com.fiap.FraudWatch.exception.CepNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -31,10 +32,11 @@ public class EnderecoServiceAsync {
         String url = "https://viacep.com.br/ws/" + cepFormatado + "/json/";
         ViaCepResponse response = restTemplate.getForObject(url, ViaCepResponse.class);
 
-        if (response != null) {
-            return response;
+        if (response == null || response.cep() == null) {
+            throw new CepNaoEncontradoException("CEP não encontrado para o CEP: " + cep);
         } else {
-            throw new RuntimeException("Erro ao consumir a API ViaCEP");
+            return response;
         }
     }
+
 }

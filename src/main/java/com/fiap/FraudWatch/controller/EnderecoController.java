@@ -22,9 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -48,7 +46,7 @@ public class EnderecoController {
     })
     @PostMapping
     public ResponseEntity<EnderecoResponse> CreateEndereco(@Valid @RequestBody EnderecoRequest enderecoRequest){
-        ViaCepResponse viaCepResponse = enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep());
+        Future<ViaCepResponse> viaCepResponse = enderecoServiceAsync.obterEnderecoPorCepAsync(enderecoRequest.cep());
         Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
         Endereco enderecoCriado = enderecoRepository.save(enderecoConvertido);
         EnderecoResponse enderecoResponse = enderecoService.enderecoToResponse(enderecoCriado);
@@ -62,15 +60,29 @@ public class EnderecoController {
             @ApiResponse(responseCode = "400", description = "Erro na requisição")
     })
     @PostMapping("/list")
-    public ResponseEntity<List<EnderecoResponse>> CreateEnderecos(@Valid @RequestBody List<EnderecoRequest> enderecoRequestList){
+    public ResponseEntity<Map<String, Object>> CreateEnderecos(@Valid @RequestBody List<EnderecoRequest> enderecoRequestList) {
         List<EnderecoResponse> enderecoResponseList = new ArrayList<>();
-        for (EnderecoRequest enderecoRequest : enderecoRequestList){
-            ViaCepResponse viaCepResponse = enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep());
-            Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
-            Endereco enderecoCriado = enderecoRepository.save(enderecoConvertido);
-            enderecoResponseList.add(enderecoService.enderecoToResponse(enderecoCriado));
+        int successCount = 0;
+        int failureCount = 0;
+
+        for (EnderecoRequest enderecoRequest : enderecoRequestList) {
+            try {
+                Future<ViaCepResponse> viaCepResponse = enderecoServiceAsync.obterEnderecoPorCepAsync(enderecoRequest.cep());
+                Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
+                Endereco enderecoCriado = enderecoRepository.save(enderecoConvertido);
+                enderecoResponseList.add(enderecoService.enderecoToResponse(enderecoCriado));
+                successCount++;
+            } catch (Exception e) {
+                failureCount++;
+            }
         }
-        return new ResponseEntity<>(enderecoResponseList, HttpStatus.CREATED);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("successCount", successCount);
+        result.put("failureCount", failureCount);
+        result.put("createdEnderecos", enderecoResponseList);
+
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
 
@@ -120,7 +132,7 @@ public class EnderecoController {
         if (enderecoSalvo.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        ViaCepResponse viaCepResponse = enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep());
+        Future<ViaCepResponse> viaCepResponse = enderecoServiceAsync.obterEnderecoPorCepAsync(enderecoRequest.cep());
         Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
         enderecoConvertido.setId(enderecoSalvo.get().getId());
         Endereco enderecoAtualizado = enderecoRepository.save(enderecoConvertido);

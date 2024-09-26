@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -55,14 +56,27 @@ public class UsuarioController {
     @PostMapping("/list")
     public ResponseEntity<List<UsuarioResponse>> CreateUsuarios(@Valid @RequestBody List<UsuarioRequest> usuarioRequestList){
         List<UsuarioResponse> usuarioResponseList = new ArrayList<>();
-        for (UsuarioRequest usuarioRequest : usuarioRequestList) {
-            Usuario usuarioConvertido = usuarioService.requestToUsuario(usuarioRequest, usuarioRequest.endereco());
-            Usuario usuarioCriado = usuarioRepository.save(usuarioConvertido);
-            usuarioResponseList.add(usuarioService.usuarioToResponse(usuarioCriado));
+        int successCount = 0;
+        int failureCount = 0;
+        try {
+            for (UsuarioRequest usuarioRequest : usuarioRequestList) {
+                Usuario usuarioConvertido = usuarioService.requestToUsuario(usuarioRequest, usuarioRequest.endereco());
+                Usuario usuarioCriado = usuarioRepository.save(usuarioConvertido);
+                UsuarioResponse usuarioResponse = usuarioService.usuarioToResponse(usuarioCriado);
+                usuarioResponseList.add(usuarioResponse);
+                successCount++;
+            }
+        } catch (Exception e) {
+            failureCount++;
         }
-        return new ResponseEntity<>(usuarioResponseList, HttpStatus.CREATED);
+        Map<String, Object> response = Map.of(
+                "successCount", successCount,
+                "failureCount", failureCount,
+                "createdEnderecos", usuarioResponseList
+        );
+        return new ResponseEntity(response, HttpStatus.CREATED);
     }
-
+    
     @Operation(summary = "Buscar todos os usuarios")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuarios encontrados com sucesso"),
