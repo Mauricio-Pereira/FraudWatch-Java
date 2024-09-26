@@ -26,31 +26,16 @@ public class EnderecoService {
     private final EstadoRepository estadoRepository;
     @Autowired
     private final RegiaoRepository regiaoRepository;
-    @Autowired
-    private final RestTemplate restTemplate;
 
-    public EnderecoService(BairroRepository bairroRepository, CidadeRepository cidadeRepository, EstadoRepository estadoRepository, RegiaoRepository regiaoRepository, RestTemplate restTemplate) {
+    public EnderecoService(BairroRepository bairroRepository, CidadeRepository cidadeRepository, EstadoRepository estadoRepository, RegiaoRepository regiaoRepository) {
         this.bairroRepository = bairroRepository;
         this.cidadeRepository = cidadeRepository;
         this.estadoRepository = estadoRepository;
         this.regiaoRepository = regiaoRepository;
-        this.restTemplate = restTemplate;
     }
 
 
 
-    public ViaCepResponse obterEnderecoPorCep(String cep) {
-        String cepFormatado = cep.replaceAll("-", "");
-        String url = "https://viacep.com.br/ws/" + cepFormatado + "/json/";
-
-        ResponseEntity<ViaCepResponse> response = restTemplate.getForEntity(url, ViaCepResponse.class);
-
-        if (response.getStatusCode().is2xxSuccessful()) {
-            return response.getBody();
-        } else {
-            throw new RuntimeException("Erro ao consumir a API ViaCEP: " + response.getStatusCode());
-        }
-    }
 
     public Endereco requestToEndereco(EnderecoRequest enderecoRequest, ViaCepResponse viaCepResponse) {
 

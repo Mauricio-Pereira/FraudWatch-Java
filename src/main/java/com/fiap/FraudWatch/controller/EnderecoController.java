@@ -5,6 +5,7 @@ import com.fiap.FraudWatch.dto.viaCepDto.ViaCepResponse;
 import com.fiap.FraudWatch.model.Endereco;
 import com.fiap.FraudWatch.repository.EnderecoRepository;
 import com.fiap.FraudWatch.service.EnderecoService;
+import com.fiap.FraudWatch.service.EnderecoServiceAsync;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 
 @RestController
@@ -34,6 +37,8 @@ public class EnderecoController {
     private EnderecoService enderecoService;
     @Autowired
     private EnderecoRepository enderecoRepository;
+    @Autowired
+    private EnderecoServiceAsync enderecoServiceAsync;
     private Pageable pageable = PageRequest.of(0,4, Sort.by("cep").ascending());
 
     @Operation(summary = "Criar um endereco")
@@ -43,12 +48,13 @@ public class EnderecoController {
     })
     @PostMapping
     public ResponseEntity<EnderecoResponse> CreateEndereco(@Valid @RequestBody EnderecoRequest enderecoRequest){
-        ViaCepResponse viaCepResponse = enderecoService.obterEnderecoPorCep(enderecoRequest.cep());
+        ViaCepResponse viaCepResponse = enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep());
         Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
         Endereco enderecoCriado = enderecoRepository.save(enderecoConvertido);
         EnderecoResponse enderecoResponse = enderecoService.enderecoToResponse(enderecoCriado);
         return new ResponseEntity<>(enderecoResponse, HttpStatus.CREATED);
     }
+
 
     @Operation(summary = "Criar varios enderecos")
     @ApiResponses(value = {
@@ -59,7 +65,7 @@ public class EnderecoController {
     public ResponseEntity<List<EnderecoResponse>> CreateEnderecos(@Valid @RequestBody List<EnderecoRequest> enderecoRequestList){
         List<EnderecoResponse> enderecoResponseList = new ArrayList<>();
         for (EnderecoRequest enderecoRequest : enderecoRequestList){
-            ViaCepResponse viaCepResponse = enderecoService.obterEnderecoPorCep(enderecoRequest.cep());
+            ViaCepResponse viaCepResponse = enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep());
             Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
             Endereco enderecoCriado = enderecoRepository.save(enderecoConvertido);
             enderecoResponseList.add(enderecoService.enderecoToResponse(enderecoCriado));
@@ -114,7 +120,7 @@ public class EnderecoController {
         if (enderecoSalvo.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        ViaCepResponse viaCepResponse = enderecoService.obterEnderecoPorCep(enderecoRequest.cep());
+        ViaCepResponse viaCepResponse = enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep());
         Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
         enderecoConvertido.setId(enderecoSalvo.get().getId());
         Endereco enderecoAtualizado = enderecoRepository.save(enderecoConvertido);
@@ -137,4 +143,7 @@ public class EnderecoController {
         enderecoRepository.delete(enderecoSalvo.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+
 }

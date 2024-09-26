@@ -27,14 +27,14 @@ public class UsuarioService {
     @Autowired
     private final EnderecoService enderecoService;
     @Autowired
-    private final EnderecoRepository enderecoRepository;
+    private final EnderecoServiceAsync enderecoServiceAsync;
     @Autowired
     private final TipoUsuarioRepository tipoUsuarioRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, EnderecoService enderecoService, EnderecoRepository enderecoRepository, TipoUsuarioRepository tipoUsuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, EnderecoService enderecoService, EnderecoServiceAsync enderecoServiceAsync, TipoUsuarioRepository tipoUsuarioRepository) {
         this.usuarioRepository = usuarioRepository;
         this.enderecoService = enderecoService;
-        this.enderecoRepository = enderecoRepository;
+        this.enderecoServiceAsync = enderecoServiceAsync;
         this.tipoUsuarioRepository = tipoUsuarioRepository;
     }
 
@@ -59,7 +59,7 @@ public class UsuarioService {
         TipoUsuario tipoUsuario = tipoUsuarioRepository.findById(usuarioRequest.tipoUsuarioid())
                 .orElseThrow(() -> new IllegalArgumentException("Tipo de usuário não encontrado"));
         usuario.setTipoUsuario(tipoUsuario);
-        usuario.setEndereco(enderecoService.requestToEndereco(enderecoRequest, enderecoService.obterEnderecoPorCep(enderecoRequest.cep())));
+        usuario.setEndereco(enderecoService.requestToEndereco(enderecoRequest, enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep())));
         return usuario;
 
     }
@@ -110,7 +110,7 @@ public class UsuarioService {
         usuarioExistente.setTipoUsuario(tipoUsuario);
 
         // Atualizar o endereço
-        usuarioExistente.setEndereco(enderecoService.requestToEndereco(enderecoRequest, enderecoService.obterEnderecoPorCep(enderecoRequest.cep())));
+        usuarioExistente.setEndereco(enderecoService.requestToEndereco(enderecoRequest, enderecoServiceAsync.obterEnderecoPorCep(enderecoRequest.cep())));
 
         // O campo DataCadastro não será alterado
 
