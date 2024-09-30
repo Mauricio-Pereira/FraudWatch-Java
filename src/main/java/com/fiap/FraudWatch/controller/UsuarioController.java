@@ -72,7 +72,7 @@ public class UsuarioController {
         Map<String, Object> response = Map.of(
                 "successCount", successCount,
                 "failureCount", failureCount,
-                "createdEnderecos", usuarioResponseList
+                "createdUsuarios", usuarioResponseList
         );
         return new ResponseEntity(response, HttpStatus.CREATED);
     }

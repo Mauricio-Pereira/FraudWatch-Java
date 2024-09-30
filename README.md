@@ -104,10 +104,16 @@ A arquitetura utilizada no projeto FraudWatch é uma arquitetura em camadas. Est
 ### Diagrama de Arquitetura
 
 ### Diagrama de Classes 
+O diagrama de classes representa as principais entidades do projeto FraudWatch, incluindo Usuário e Endereço. Cada entidade possui atributos e métodos que definem seu comportamento e relacionamentos com outras entidades.  
+*Para melhor visualização, o diagrama está disponível no diretório: `/documentation/FraudWatch_Class_Diagram.jpg`.*
+![Diagrama de Classes](/documentation/FraudWatch_Class_Diagram.jpg) 
 
 ### Diagrama de Entidade-Relacionamento (DER)
-
-
+O diagrama entidade-relacionamento (DER) é uma representação visual dos relacionamentos entre as entidades do banco de dados. Ele mostra como as tabelas estão conectadas e quais são as chaves primárias e estrangeiras.  
+O diagrama representa as entidades Usuário e Endereço, mostrando como elas se relacionam no banco de dados, além das classes que ainda serão implementadas.  
+*Para melhor visualização, o diagrama está disponível no diretório: `/documentation/FraudWatch_DER.pdf`.*
+![DER](/documentation/FraudWatch_DER.png) 
+* 
 ### Descrição do nível de maturidade da API
 A API está no Nível 2 do Modelo de Maturidade de Richardson, o que significa que ela utiliza:
 
