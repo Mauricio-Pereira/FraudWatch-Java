@@ -8,6 +8,170 @@
 	},
 	"item": [
 		{
+			"name": "USUARIOS",
+			"item": [
+				{
+					"name": "CREATE USUARIO WITH ENDERECO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"João 1\",\r\n  \"sobrenome\": \"Silva 1\",\r\n  \"email\": \"joaosilva1@example.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"cpf\": \"12345678901\",\r\n  \"dataNascimento\": \"1990-01-01\",\r\n  \"telefone\": \"1199999-9999\",\r\n  \"tipoUsuarioid\": 2,\r\n  \"endereco\": {\r\n    \"cep\": \"37460-000\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"numero\": \"123\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\",\r\n    \"regiao\": \"Sudeste\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE LIST OF USUARIOS WITH ENDERECOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n        {\r\n    \"nome\": \"João 2\",\r\n    \"sobrenome\": \"Silva 2\",\r\n    \"email\": \"joaosilva2@example.com\",\r\n    \"senha\": \"Senha@123\",\r\n    \"cpf\": \"12345678902\",\r\n    \"dataNascimento\": \"1990-01-01\",\r\n    \"telefone\": \"1199999-9999\",\r\n    \"tipoUsuarioid\": 2,\r\n    \"endereco\": {\r\n        \"cep\": \"01001-000\",\r\n        \"logradouro\": \"Rua Exemplo\",\r\n        \"numero\": \"123\",\r\n        \"complemento\": \"Apto 101\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\",\r\n        \"regiao\": \"Sudeste\"\r\n    }\r\n    },\r\n    {\r\n    \"nome\": \"João 3\",\r\n    \"sobrenome\": \"Silva 3\",\r\n    \"email\": \"joaosilva3@example.com\",\r\n    \"senha\": \"Senha@123\",\r\n    \"cpf\": \"12345678903\",\r\n    \"dataNascimento\": \"1990-01-01\",\r\n    \"telefone\": \"1199999-9999\",\r\n    \"tipoUsuarioid\": 2,\r\n    \"endereco\": {\r\n        \"cep\": \"01001-000\",\r\n        \"logradouro\": \"Rua Exemplo\",\r\n        \"numero\": \"123\",\r\n        \"complemento\": \"Apto 101\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\",\r\n        \"regiao\": \"Sudeste\"\r\n    }\r\n    },\r\n    {\r\n    \"nome\": \"João 4\",\r\n    \"sobrenome\": \"Silva 4\",\r\n    \"email\": \"joaosilva4@example.com\",\r\n    \"senha\": \"Senha@123\",\r\n    \"cpf\": \"12345678904\",\r\n    \"dataNascimento\": \"1990-01-01\",\r\n    \"telefone\": \"1199999-9999\",\r\n    \"tipoUsuarioid\": 2,\r\n    \"endereco\": {\r\n        \"cep\": \"01001-000\",\r\n        \"logradouro\": \"Rua Exemplo\",\r\n        \"numero\": \"123\",\r\n        \"complemento\": \"Apto 101\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\",\r\n        \"regiao\": \"Sudeste\"\r\n    }\r\n},\r\n    {\r\n    \"nome\": \"João 5\",\r\n    \"sobrenome\": \"Silva 5\",\r\n    \"email\": \"joaosilva5@example.com\",\r\n    \"senha\": \"Senha@123\",\r\n    \"cpf\": \"12345678905\",\r\n    \"dataNascimento\": \"1990-01-01\",\r\n    \"telefone\": \"1199999-9999\",\r\n    \"tipoUsuarioid\": 2,\r\n    \"endereco\": {\r\n        \"cep\": \"12345-678\",\r\n        \"logradouro\": \"Rua Exemplo\",\r\n        \"numero\": \"123\",\r\n        \"complemento\": \"Apto 101\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\",\r\n        \"regiao\": \"Sudeste\"\r\n    }\r\n}\r\n\r\n]\r\n    \r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USUARIO BY ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"João 6\",\r\n  \"sobrenome\": \"Silva 6\",\r\n  \"email\": \"joaosilva6@example.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"cpf\": \"12345678906\",\r\n  \"dataNascimento\": \"1990-01-01\",\r\n  \"telefone\": \"1199999-9999\",\r\n  \"tipoUsuarioid\": 2,\r\n  \"endereco\": {\r\n    \"cep\": \"01001-000\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"numero\": \"123\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\",\r\n    \"regiao\": \"Sudeste\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USUARIO BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuario/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ ALL USUARIOS IN PAGES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuario/page/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"page",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "READ USUARIO BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "ENDERECOS",
 			"item": [
 				{
@@ -45,7 +209,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n  {\r\n    \"cep\": \"02518-130\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"bairro\": \"Bairro Exemplo\",\r\n    \"cidade\": \"Cidade Exemplo\",\r\n    \"estado\": \"Estado Exemplo\",\r\n    \"regiao\": \"Regiao Exemplo\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"numero\": \"123\"\r\n  },\r\n  {\r\n    \"cep\": \"02518-130\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"bairro\": \"Bairro Exemplo\",\r\n    \"cidade\": \"Cidade Exemplo\",\r\n    \"estado\": \"Estado Exemplo\",\r\n    \"regiao\": \"Regiao Exemplo\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"numero\": \"123\"\r\n  },\r\n  {\r\n    \"cep\": \"01001-000\",\r\n    \"logradouro\": \"Avenida Exemplo\",\r\n    \"bairro\": \"Outro Bairro\",\r\n    \"cidade\": \"Outra Cidade\",\r\n    \"estado\": \"Outro Estado\",\r\n    \"regiao\": \"Outra Regiao\",\r\n    \"complemento\": \"Casa\",\r\n    \"numero\": \"456\"\r\n  }\r\n]",
+							"raw": "[\r\n  {\r\n    \"cep\": \"02518-130\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"bairro\": \"Bairro Exemplo\",\r\n    \"cidade\": \"Cidade Exemplo\",\r\n    \"estado\": \"Estado Exemplo\",\r\n    \"regiao\": \"Regiao Exemplo\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"numero\": \"123\"\r\n  },\r\n  {\r\n    \"cep\": \"02518-130\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"bairro\": \"Bairro Exemplo\",\r\n    \"cidade\": \"Cidade Exemplo\",\r\n    \"estado\": \"Estado Exemplo\",\r\n    \"regiao\": \"Regiao Exemplo\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"numero\": \"123\"\r\n  },\r\n  {\r\n    \"cep\": \"01001-000\",\r\n    \"logradouro\": \"Avenida Exemplo\",\r\n    \"bairro\": \"Outro Bairro\",\r\n    \"cidade\": \"Outra Cidade\",\r\n    \"estado\": \"Outro Estado\",\r\n    \"regiao\": \"Outra Regiao\",\r\n    \"complemento\": \"Casa\",\r\n    \"numero\": \"456\"\r\n  },\r\n  {\r\n    \"cep\": \"01234-567\",\r\n    \"logradouro\": \"Rua Nova\",\r\n    \"bairro\": \"Bairro Novo\",\r\n    \"cidade\": \"Nova Cidade\",\r\n    \"estado\": \"Novo Estado\",\r\n    \"regiao\": \"Regiao Norte\",\r\n    \"complemento\": \"Apto 302\",\r\n    \"numero\": \"789\"\r\n  },\r\n  {\r\n    \"cep\": \"01345-678\",\r\n    \"logradouro\": \"Rua Antiga\",\r\n    \"bairro\": \"Bairro Antigo\",\r\n    \"cidade\": \"Antiga Cidade\",\r\n    \"estado\": \"Antigo Estado\",\r\n    \"regiao\": \"Regiao Sul\",\r\n    \"complemento\": \"Casa 2\",\r\n    \"numero\": \"101\"\r\n  },\r\n  {\r\n    \"cep\": \"02345-678\",\r\n    \"logradouro\": \"Alameda Verde\",\r\n    \"bairro\": \"Bairro Verde\",\r\n    \"cidade\": \"Cidade Verde\",\r\n    \"estado\": \"Estado Verde\",\r\n    \"regiao\": \"Regiao Oeste\",\r\n    \"complemento\": \"Bloco A\",\r\n    \"numero\": \"222\"\r\n  },\r\n  {\r\n    \"cep\": \"03456-789\",\r\n    \"logradouro\": \"Rua Azul\",\r\n    \"bairro\": \"Bairro Azul\",\r\n    \"cidade\": \"Cidade Azul\",\r\n    \"estado\": \"Estado Azul\",\r\n    \"regiao\": \"Regiao Leste\",\r\n    \"complemento\": \"Cobertura\",\r\n    \"numero\": \"333\"\r\n  },\r\n  {\r\n    \"cep\": \"04567-890\",\r\n    \"logradouro\": \"Avenida Central\",\r\n    \"bairro\": \"Bairro Central\",\r\n    \"cidade\": \"Cidade Central\",\r\n    \"estado\": \"Estado Central\",\r\n    \"regiao\": \"Regiao Central\",\r\n    \"complemento\": \"Sala 5\",\r\n    \"numero\": \"444\"\r\n  },\r\n  {\r\n    \"cep\": \"05678-901\",\r\n    \"logradouro\": \"Travessa do Sol\",\r\n    \"bairro\": \"Bairro do Sol\",\r\n    \"cidade\": \"Cidade Solar\",\r\n    \"estado\": \"Estado Solar\",\r\n    \"regiao\": \"Regiao Norte\",\r\n    \"complemento\": \"Casa 10\",\r\n    \"numero\": \"555\"\r\n  },\r\n  {\r\n    \"cep\": \"06789-012\",\r\n    \"logradouro\": \"Estrada do Campo\",\r\n    \"bairro\": \"Bairro do Campo\",\r\n    \"cidade\": \"Cidade Rural\",\r\n    \"estado\": \"Estado Rural\",\r\n    \"regiao\": \"Regiao Oeste\",\r\n    \"complemento\": \"Chácara\",\r\n    \"numero\": \"666\"\r\n  }\r\n]\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -163,158 +327,6 @@
 							"port": "8080",
 							"path": [
 								"endereco",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "USUARIOS",
-			"item": [
-				{
-					"name": "CREATE USUARIO WITH ENDERECO",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"João 1\",\r\n  \"sobrenome\": \"Silva 1\",\r\n  \"email\": \"joaosilva1@example.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"cpf\": \"12345678901\",\r\n  \"dataNascimento\": \"1990-01-01\",\r\n  \"telefone\": \"1199999-9999\",\r\n  \"tipoUsuarioid\": 2,\r\n  \"endereco\": {\r\n    \"cep\": \"01001-000\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"numero\": \"123\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\",\r\n    \"regiao\": \"Sudeste\"\r\n  }\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/usuario",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CREATE LIST OF USUARIOS WITH ENDERECOS",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n        {\r\n    \"nome\": \"João 2\",\r\n    \"sobrenome\": \"Silva 2\",\r\n    \"email\": \"joaosilva2@example.com\",\r\n    \"senha\": \"Senha@123\",\r\n    \"cpf\": \"12345678902\",\r\n    \"dataNascimento\": \"1990-01-01\",\r\n    \"telefone\": \"1199999-9999\",\r\n    \"tipoUsuarioid\": 2,\r\n    \"endereco\": {\r\n        \"cep\": \"01001-000\",\r\n        \"logradouro\": \"Rua Exemplo\",\r\n        \"numero\": \"123\",\r\n        \"complemento\": \"Apto 101\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\",\r\n        \"regiao\": \"Sudeste\"\r\n    }\r\n    },\r\n    {\r\n    \"nome\": \"João 3\",\r\n    \"sobrenome\": \"Silva 3\",\r\n    \"email\": \"joaosilva3@example.com\",\r\n    \"senha\": \"Senha@123\",\r\n    \"cpf\": \"12345678903\",\r\n    \"dataNascimento\": \"1990-01-01\",\r\n    \"telefone\": \"1199999-9999\",\r\n    \"tipoUsuarioid\": 2,\r\n    \"endereco\": {\r\n        \"cep\": \"01001-000\",\r\n        \"logradouro\": \"Rua Exemplo\",\r\n        \"numero\": \"123\",\r\n        \"complemento\": \"Apto 101\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\",\r\n        \"regiao\": \"Sudeste\"\r\n    }\r\n    },\r\n    {\r\n    \"nome\": \"João 4\",\r\n    \"sobrenome\": \"Silva 4\",\r\n    \"email\": \"joaosilva4@example.com\",\r\n    \"senha\": \"Senha@123\",\r\n    \"cpf\": \"12345678904\",\r\n    \"dataNascimento\": \"1990-01-01\",\r\n    \"telefone\": \"1199999-9999\",\r\n    \"tipoUsuarioid\": 2,\r\n    \"endereco\": {\r\n        \"cep\": \"01001-000\",\r\n        \"logradouro\": \"Rua Exemplo\",\r\n        \"numero\": \"123\",\r\n        \"complemento\": \"Apto 101\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\",\r\n        \"regiao\": \"Sudeste\"\r\n    }\r\n},\r\n    {\r\n    \"nome\": \"João 5\",\r\n    \"sobrenome\": \"Silva 5\",\r\n    \"email\": \"joaosilva5@example.com\",\r\n    \"senha\": \"Senha@123\",\r\n    \"cpf\": \"12345678905\",\r\n    \"dataNascimento\": \"1990-01-01\",\r\n    \"telefone\": \"1199999-9999\",\r\n    \"tipoUsuarioid\": 2,\r\n    \"endereco\": {\r\n        \"cep\": \"01001-000\",\r\n        \"logradouro\": \"Rua Exemplo\",\r\n        \"numero\": \"123\",\r\n        \"complemento\": \"Apto 101\",\r\n        \"bairro\": \"Centro\",\r\n        \"cidade\": \"São Paulo\",\r\n        \"estado\": \"SP\",\r\n        \"regiao\": \"Sudeste\"\r\n    }\r\n}\r\n\r\n]\r\n    \r\n\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/usuario/list",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario",
-								"list"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UPDATE USUARIO BY ID",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"João 6\",\r\n  \"sobrenome\": \"Silva 6\",\r\n  \"email\": \"joaosilva6@example.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"cpf\": \"12345678906\",\r\n  \"dataNascimento\": \"1990-01-01\",\r\n  \"telefone\": \"1199999-9999\",\r\n  \"tipoUsuarioid\": 2,\r\n  \"endereco\": {\r\n    \"cep\": \"01001-000\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"numero\": \"123\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\",\r\n    \"regiao\": \"Sudeste\"\r\n  }\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/usuario/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE USUARIO BY ID",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/usuario/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "READ ALL USUARIOS IN PAGES",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/usuario/page/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario",
-								"page",
-								"0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "READ USUARIO BY ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/usuario/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuario",
 								"1"
 							]
 						}

@@ -10,7 +10,7 @@ para identificar padrões fraudulentos.
 A aplicação Java será o núcleo da comunicação, responsável por cadastrar usuários e procedimentos, armazenar e processar
 dados no banco, além de disponibilizar informações para aplicações web e mobile.
 
-**Tecnologias:** _Java, Spring Boot, JPA, Hibernate, OracleSQL, Docker, .NET, Kotlin., Machine Learning_
+**Tecnologias:** _Java, Spring Boot, JPA, Hibernate, OracleSQL, Docker, .NET, Kotlin., Machine Learning_  
 **Link do PITCH:** [FraudWatch](https://www.youtube.com)
 ## Integrantes
 
@@ -185,6 +185,8 @@ cd FraudWatch
    spring.jpa.hibernate.ddl-auto=create
    spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.OracleDialect
    ```
+   É possível alterar o banco de dados para outro de sua preferência, como MySQL, PostgreSQL, etc. Basta alterar as configurações de conexão no arquivo `application.properties`
+   e adicionar a dependência correspondente no arquivo `build.gradle`.
 
 #### Passo 2: Construir e executando o projeto
 Construa o projeto utilizando o Gradle ou a IDE de sua preferência:
@@ -203,7 +205,12 @@ A aplicação estará disponível em `http://localhost:8080`.
 #### Passo 4: Testar os Endpoints
 Utilize o Postman ou outra ferramenta de sua preferência para testar os 
 endpoints da API conforme descrito anteriormente no `README.md`.
-
+É possível importar o arquivo do Postman disponível no diretório `/postman/FraudWatch.postman_collection.json` para ter acesso aos endpoints de teste.
+É possível também acessar o Swagger da aplicação em `http://localhost:8080/swagger-ui.html` para visualizar e testar os endpoints.  
+*Obs.: PODE SER NECESSÁRIO ALTERAR O JSON DE REQUISIÇÃO PARA OS ENDPOINTS DE USUÁRIO E ENDEREÇO, DE ACORDO COM O MODELO DE DADOS DEFINIDO.*
+##### Imagens do Postman
+![Postman](/documentation/POSTMAN_RUN_PT1.png)
+![Postman](/documentation/POSTMAN_RUN_PT2.png)
 
 
 

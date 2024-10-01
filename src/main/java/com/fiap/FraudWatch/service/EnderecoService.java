@@ -47,13 +47,30 @@ public class EnderecoService {
             throw new RuntimeException("Failed to get ViaCepResponse", e);
         }
 
+        // Buscar ou criar regiao
+        Regiao regiaoEntity = regiaoRepository.findByNomeRegiao(futureViaCepResponse.resultNow().regiao())
+                .orElseGet(() -> {
+                    Regiao novaRegiao = new Regiao(futureViaCepResponse.resultNow().regiao() != null ? futureViaCepResponse.resultNow().regiao() : capitalizeWords(enderecoRequest.regiao()));
+                    return regiaoRepository.save(novaRegiao); // Salva a nova Região
+                });
 
-        // Formatar para primeira letra maiúscula
-        String logradouro = (futureViaCepResponse.resultNow().logradouro() != null && !futureViaCepResponse.resultNow().logradouro().isEmpty())
-                ? capitalizeWords(futureViaCepResponse.resultNow().logradouro())
-                : (enderecoRequest.logradouro() != null && !enderecoRequest.logradouro().isEmpty())
-                ? capitalizeWords(enderecoRequest.logradouro())
-                : "Logradouro Padrão"; // Defina um valor padrão ou tratamento para null
+        // Buscar ou criar estado
+        Estado estadoEntity = estadoRepository.findByNomeEstado(futureViaCepResponse.resultNow().estado())
+                .orElseGet(() -> {
+                    Estado novoEstado = new Estado(futureViaCepResponse.resultNow().estado() != null ? futureViaCepResponse.resultNow().estado() : capitalizeWords(enderecoRequest.estado()));
+                    novoEstado.setRegiao(regiaoEntity);
+                    return estadoRepository.save(novoEstado); // Salva o novo Estado
+                });
+
+        // Buscar ou criar cidade
+        Cidade cidadeEntity = cidadeRepository.findByNomeCidade(futureViaCepResponse.resultNow().localidade())
+                .orElseGet(() -> {
+                    Cidade novaCidade = new Cidade(futureViaCepResponse.resultNow().localidade() != null
+                            ? futureViaCepResponse.resultNow().localidade() : capitalizeWords(enderecoRequest.cidade()));
+                    novaCidade.setEstado(estadoEntity);
+                    return cidadeRepository.save(novaCidade); // Salva a nova Cidade
+                });
+
 
 
         // Buscar ou criar bairro
@@ -66,33 +83,29 @@ public class EnderecoService {
                             ? capitalizeWords(enderecoRequest.bairro())
                             : "Bairro Padrão"; // Defina um valor padrão ou tratamento para null
                     Bairro novoBairro = new Bairro(nomeBairro);
+                    novoBairro.setCidade(cidadeEntity);
                     return bairroRepository.save(novoBairro); // Salva o novo Bairro no banco de dados
                 });
 
 
-        // Buscar ou criar cidade
-        Cidade cidadeEntity = cidadeRepository.findByNomeCidade(futureViaCepResponse.resultNow().localidade())
-                .orElseGet(() -> {
-                    Cidade novaCidade = new Cidade(futureViaCepResponse.resultNow().localidade() != null
-                            ? futureViaCepResponse.resultNow().localidade() : capitalizeWords(enderecoRequest.cidade()));
-                    return cidadeRepository.save(novaCidade); // Salva a nova Cidade
-                });
+        // Formatar para primeira letra maiúscula
+        String logradouro = (futureViaCepResponse.resultNow().logradouro() != null && !futureViaCepResponse.resultNow().logradouro().isEmpty())
+                ? capitalizeWords(futureViaCepResponse.resultNow().logradouro())
+                : (enderecoRequest.logradouro() != null && !enderecoRequest.logradouro().isEmpty())
+                ? capitalizeWords(enderecoRequest.logradouro())
+                : "Logradouro Padrão"; // Defina um valor padrão ou tratamento para null
 
 
-        // Buscar ou criar estado
-        Estado estadoEntity = estadoRepository.findByNomeEstado(futureViaCepResponse.resultNow().estado())
-                .orElseGet(() -> {
-                    Estado novoEstado = new Estado(futureViaCepResponse.resultNow().estado() != null ? futureViaCepResponse.resultNow().estado() : capitalizeWords(enderecoRequest.estado()));
-                    return estadoRepository.save(novoEstado); // Salva o novo Estado
-                });
 
 
-        // Buscar ou criar regiao
-        Regiao regiaoEntity = regiaoRepository.findByNomeRegiao(futureViaCepResponse.resultNow().regiao())
-                .orElseGet(() -> {
-                    Regiao novaRegiao = new Regiao(futureViaCepResponse.resultNow().regiao() != null ? futureViaCepResponse.resultNow().regiao() : capitalizeWords(enderecoRequest.regiao()));
-                    return regiaoRepository.save(novaRegiao); // Salva a nova Região
-                });
+
+
+
+
+
+
+
+
 
         // Atualizar a cidade com o estado e a região
         bairroEntity.setCidade(cidadeEntity);
