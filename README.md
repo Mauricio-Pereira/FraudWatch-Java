@@ -68,6 +68,11 @@ dados no banco, além de disponibilizar informações para aplicações web e mo
 | Desenvolvimento do modelo de Machine Learning para detecção de fraudes | Yago Lucas Gonçalves | 01/10                |
 | Documentação de QA e documentação dos casos de uso para o modelo de IA | Yago Lucas Gonçalves | 01/10                |
 
+#### Revisão e Finalização de Documentação
+
+| **Atividade**                         | **Responsável**                   | **Prazo de Entrega** |
+|---------------------------------------|-----------------------------------|----------------------|
+| Revisão e finalização da documentação | Maurício Vieira Pereira, Luis Otávio Leitão, Yago Lucas Gonçalves | 07/10 |
 ---
 
 ### Atividades da Sprint 2
