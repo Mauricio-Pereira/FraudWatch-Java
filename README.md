@@ -11,7 +11,7 @@ A aplicação Java será o núcleo da comunicação, responsável por cadastrar 
 dados no banco, além de disponibilizar informações para aplicações web e mobile.
 
 **Tecnologias:** _Java, Spring Boot, JPA, Hibernate, OracleSQL, Docker, .NET, Kotlin., Machine Learning_  
-**Link do PITCH:** [FraudWatch](https://www.youtube.com)
+**Link do PITCH:** [FraudWatch](https://www.youtube.com/watch?v=jExbQ6DjZaw)
 ## Integrantes
 
 - [Maurício Vieira Pereira](https://github.com/Mauricio-Pereira/)
