@@ -191,7 +191,8 @@ cd FraudWatch
    spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.OracleDialect
    ```
    É possível alterar o banco de dados para outro de sua preferência, como MySQL, PostgreSQL, etc. Basta alterar as configurações de conexão no arquivo `application.properties`
-   e adicionar a dependência correspondente no arquivo `build.gradle`.
+   e adicionar a dependência correspondente no arquivo `build.gradle`.  
+   O banco de dados para teste é o H2, que é um banco de dados em memória.
 
 #### Passo 2: Construir e executando o projeto
 Construa o projeto utilizando o Gradle ou a IDE de sua preferência:
