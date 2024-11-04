@@ -29,7 +29,7 @@ public record UsuarioRequest (
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         LocalDate dataNascimento,
         @NotBlank(message = "O telefone é obrigatório")
-        @Pattern(regexp = "\\d{2}\\d{4,5}-\\d{4}", message = "O telefone deve estar no formato 99 99999-9999")
+        @Pattern(regexp = "\\d{2}\\d{4,5}-\\d{4}", message = "O telefone deve estar no formato 9999999-9999")
         String telefone,
         @NotNull(message = "O tipo de usuário é obrigatório, sendo 1 para Dentista, 2 para Paciente e 3 para Analista")
         Long tipoUsuarioid,

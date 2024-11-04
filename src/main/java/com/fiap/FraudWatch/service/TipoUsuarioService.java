@@ -14,21 +14,21 @@ public class TipoUsuarioService {
 
     @Transactional
     public void inicializarTiposUsuario() {
-        // Verifica se o tipo de usuário "Dentista" existe, se não, cria.
+        // Verifica se o tipo de usuário "Dentista" existe; se não, cria.
         if (tipoUsuarioRepository.findByDescricao("Dentista").isEmpty()) {
             TipoUsuario dentista = new TipoUsuario();
             dentista.setDescricao("Dentista");
             tipoUsuarioRepository.save(dentista);
         }
 
-        // Verifica se o tipo de usuário "Paciente" existe, se não, cria.
+        // Verifica se o tipo de usuário "Paciente" existe; se não, cria.
         if (tipoUsuarioRepository.findByDescricao("Paciente").isEmpty()) {
             TipoUsuario paciente = new TipoUsuario();
             paciente.setDescricao("Paciente");
             tipoUsuarioRepository.save(paciente);
         }
 
-        // Verifica se o tipo de usuário "Analista" existe, se não, cria.
+        // Verifica se o tipo de usuário "Analista" existe; se não, cria.
         if (tipoUsuarioRepository.findByDescricao("Analista").isEmpty()) {
             TipoUsuario analista = new TipoUsuario();
             analista.setDescricao("Analista");

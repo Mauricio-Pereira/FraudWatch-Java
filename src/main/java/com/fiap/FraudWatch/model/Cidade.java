@@ -2,10 +2,18 @@ package com.fiap.FraudWatch.model;
 
 import com.fiap.FraudWatch.model.Estado;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "CH_CIDADE")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cidade {
 
     @Id
@@ -25,31 +33,5 @@ public class Cidade {
         this.nomeCidade = cidade;
     }
 
-    public Cidade() {
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNomeCidade() {
-        return nomeCidade;
-    }
-
-    public void setNomeCidade(String nomeCidade) {
-        this.nomeCidade = nomeCidade;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
 }

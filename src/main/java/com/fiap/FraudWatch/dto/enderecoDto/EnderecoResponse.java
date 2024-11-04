@@ -1,14 +1,24 @@
 package com.fiap.FraudWatch.dto.enderecoDto;
 
-public record EnderecoResponse(
-        Long id,
-        String cep,
-        String logradouro,
-        String bairro,
-        String cidade,
-        String estado,
-        String regiao,
-        String complemento,
-        String numero
-) {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.hateoas.Link;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class EnderecoResponse {
+    private Long id;
+    private String cep;
+    private String logradouro;
+    private String bairro;
+    private String cidade;
+    private String estado;
+    private String regiao;
+    private String complemento;
+    private String numero;
+    private Link link;
 }

@@ -22,12 +22,12 @@ public class EnderecoServiceAsync {
     }
 
 
-    public Future<ViaCepResponse> obterEnderecoPorCepAsync(String cep) {
+    public Future<ViaCepResponse> ObterEnderecoPorCepAsync(String cep) {
         // Criar um Future para retornar o resultado da execução
-        return executorService.submit(() -> obterEnderecoPorCep(cep));
+        return executorService.submit(() -> ObterEnderecoPorCep(cep));
     }
 
-    public ViaCepResponse obterEnderecoPorCep(String cep) {
+    public ViaCepResponse ObterEnderecoPorCep(String cep) {
         String cepFormatado = cep.replaceAll("-", "");
         String url = "https://viacep.com.br/ws/" + cepFormatado + "/json/";
         ViaCepResponse response = restTemplate.getForObject(url, ViaCepResponse.class);

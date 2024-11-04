@@ -1,5 +1,7 @@
 package com.fiap.FraudWatch.dto.viaCepDto;
 
+import java.util.concurrent.Future;
+
 public record ViaCepResponse(
         String cep,
         String logradouro,
@@ -7,5 +9,4 @@ public record ViaCepResponse(
         String localidade,
         String estado,
         String regiao
-) {
-}
+){}

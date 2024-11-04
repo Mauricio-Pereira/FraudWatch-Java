@@ -11,12 +11,12 @@ import java.util.concurrent.Executors;
 public class AppConfig {
 
     @Bean
-    public RestTemplate restTemplate() {
+    public RestTemplate RestTemplate() {
         return new RestTemplate();
     }
 
     @Bean
-    public ExecutorService executorService() {
+    public ExecutorService ExecutorService() {
         return Executors.newFixedThreadPool(10);
     }
 }

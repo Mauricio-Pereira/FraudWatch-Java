@@ -1,6 +1,7 @@
 package com.fiap.FraudWatch.controller;
 import com.fiap.FraudWatch.dto.enderecoDto.EnderecoRequest;
 import com.fiap.FraudWatch.dto.enderecoDto.EnderecoResponse;
+import com.fiap.FraudWatch.dto.enderecoDto.EnderecoResponseDTO;
 import com.fiap.FraudWatch.dto.viaCepDto.ViaCepResponse;
 import com.fiap.FraudWatch.model.Endereco;
 import com.fiap.FraudWatch.repository.EnderecoRepository;
@@ -23,8 +24,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @RestController
@@ -39,17 +42,19 @@ public class EnderecoController {
     private EnderecoServiceAsync enderecoServiceAsync;
     private Pageable pageable = PageRequest.of(0,4, Sort.by("cep").ascending());
 
+
+
     @Operation(summary = "Criar um endereco")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Endereco criado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Erro na requisição")
     })
     @PostMapping
-    public ResponseEntity<EnderecoResponse> CreateEndereco(@Valid @RequestBody EnderecoRequest enderecoRequest){
-        Future<ViaCepResponse> viaCepResponse = enderecoServiceAsync.obterEnderecoPorCepAsync(enderecoRequest.cep());
-        Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
+    public ResponseEntity<EnderecoResponseDTO> CreateEndereco(@Valid @RequestBody EnderecoRequest enderecoRequest){
+        Future<ViaCepResponse> viaCepResponse = enderecoServiceAsync.ObterEnderecoPorCepAsync(enderecoRequest.cep());
+        Endereco enderecoConvertido = enderecoService.RequestToEndereco(enderecoRequest, viaCepResponse);
         Endereco enderecoCriado = enderecoRepository.save(enderecoConvertido);
-        EnderecoResponse enderecoResponse = enderecoService.enderecoToResponse(enderecoCriado);
+        EnderecoResponseDTO enderecoResponse = enderecoService.EnderecoToResponseDTO(enderecoCriado);
         return new ResponseEntity<>(enderecoResponse, HttpStatus.CREATED);
     }
 
@@ -61,16 +66,16 @@ public class EnderecoController {
     })
     @PostMapping("/list")
     public ResponseEntity<Map<String, Object>> CreateEnderecos(@Valid @RequestBody List<EnderecoRequest> enderecoRequestList) {
-        List<EnderecoResponse> enderecoResponseList = new ArrayList<>();
+        List<EnderecoResponseDTO> enderecoResponseList = new ArrayList<>();
         int successCount = 0;
         int failureCount = 0;
 
         for (EnderecoRequest enderecoRequest : enderecoRequestList) {
             try {
-                Future<ViaCepResponse> viaCepResponse = enderecoServiceAsync.obterEnderecoPorCepAsync(enderecoRequest.cep());
-                Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
+                Future<ViaCepResponse> viaCepResponse = enderecoServiceAsync.ObterEnderecoPorCepAsync(enderecoRequest.cep());
+                Endereco enderecoConvertido = enderecoService.RequestToEndereco(enderecoRequest, viaCepResponse);
                 Endereco enderecoCriado = enderecoRepository.save(enderecoConvertido);
-                enderecoResponseList.add(enderecoService.enderecoToResponse(enderecoCriado));
+                enderecoResponseList.add(enderecoService.EnderecoToResponseDTO(enderecoCriado));
                 successCount++;
             } catch (Exception e) {
                 failureCount++;
@@ -100,7 +105,12 @@ public class EnderecoController {
         }
         List<EnderecoResponse> enderecoResponseList = new ArrayList<>();
         for (Endereco endereco : enderecoPage){
-            enderecoResponseList.add(enderecoService.enderecoToResponse(endereco));
+            EnderecoResponseDTO enderecoResponseDTO = enderecoService.EnderecoToResponseDTO(endereco);
+            EnderecoResponse enderecoResponse = enderecoService.EnderecoToResponse(endereco,
+                    linkTo(methodOn(EnderecoController.class)
+                            .ReadEnderecoById(enderecoResponseDTO.id())
+                    ).withSelfRel());
+            enderecoResponseList.add(enderecoResponse);
         }
         return new ResponseEntity<>(enderecoResponseList, HttpStatus.OK);
     }
@@ -117,7 +127,10 @@ public class EnderecoController {
         if (enderecoSalvo.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        EnderecoResponse enderecoResponse = enderecoService.enderecoToResponse(enderecoSalvo.get());
+        EnderecoResponse enderecoResponse = enderecoService.EnderecoToResponse(enderecoSalvo.get(),
+                linkTo(methodOn(EnderecoController.class)
+                        .ReadEnderecoById(id)
+                ).withSelfRel());
         return new ResponseEntity<>(enderecoResponse, HttpStatus.OK);
     }
 
@@ -127,16 +140,16 @@ public class EnderecoController {
             @ApiResponse(responseCode = "404", description = "Endereco não encontrado", content = @Content(schema = @Schema()))
     })
     @PutMapping("/{id}")
-    public ResponseEntity<EnderecoResponse> UpdateEnderecoById(@Valid @PathVariable Long id, @RequestBody EnderecoRequest enderecoRequest){
+    public ResponseEntity<EnderecoResponseDTO> UpdateEnderecoById(@Valid @PathVariable Long id, @RequestBody EnderecoRequest enderecoRequest){
         Optional<Endereco> enderecoSalvo = enderecoRepository.findById(id);
         if (enderecoSalvo.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        Future<ViaCepResponse> viaCepResponse = enderecoServiceAsync.obterEnderecoPorCepAsync(enderecoRequest.cep());
-        Endereco enderecoConvertido = enderecoService.requestToEndereco(enderecoRequest, viaCepResponse);
+        Future<ViaCepResponse> viaCepResponse = enderecoServiceAsync.ObterEnderecoPorCepAsync(enderecoRequest.cep());
+        Endereco enderecoConvertido = enderecoService.RequestToEndereco(enderecoRequest, viaCepResponse);
         enderecoConvertido.setId(enderecoSalvo.get().getId());
         Endereco enderecoAtualizado = enderecoRepository.save(enderecoConvertido);
-        EnderecoResponse enderecoResponse = enderecoService.enderecoToResponse(enderecoAtualizado);
+        EnderecoResponseDTO enderecoResponse = enderecoService.EnderecoToResponseDTO(enderecoAtualizado);
         return new ResponseEntity<>(enderecoResponse, HttpStatus.OK);
     }
 
@@ -147,7 +160,7 @@ public class EnderecoController {
             @ApiResponse(responseCode = "404", description = "Endereco não encontrado", content = @Content(schema = @Schema()))
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<EnderecoResponse> DeleteEndereco(@PathVariable Long id){
+    public ResponseEntity<EnderecoResponseDTO> DeleteEndereco(@PathVariable Long id){
         Optional<Endereco> enderecoSalvo = enderecoRepository.findById(id);
         if (enderecoSalvo.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -155,6 +168,65 @@ public class EnderecoController {
         enderecoRepository.delete(enderecoSalvo.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+
+    @Operation(summary = "Criar um endereco usando procedure")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Endereco criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro na requisição")
+    })
+    @PostMapping("/procedure")
+    public ResponseEntity<EnderecoResponseDTO> createEndereco(@Valid @RequestBody EnderecoRequest enderecoRequest) {
+        try {
+            // Chamada assíncrona para obter dados do ViaCep
+            Future<ViaCepResponse> viaCepResponseFuture = enderecoServiceAsync.ObterEnderecoPorCepAsync(enderecoRequest.cep());
+
+            // Delegar a lógica de criação para o EnderecoService
+            Endereco enderecoCriado = enderecoService.createEnderecoUsingProcedure(enderecoRequest, viaCepResponseFuture);
+
+            // Converte Endereco para EnderecoResponseDTO para a resposta
+            EnderecoResponseDTO enderecoResponse = enderecoService.EnderecoToResponseDTO(enderecoCriado);
+
+            return new ResponseEntity<>(enderecoResponse, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @Operation(summary = "Atualizar um endereco usando procedure")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Endereco atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Endereço não encontrado"),
+            @ApiResponse(responseCode = "400", description = "Erro na requisição")
+    })
+    @PutMapping("/procedure/{id}")
+    public ResponseEntity<EnderecoResponseDTO> updateEndereco(@PathVariable Long id, @Valid @RequestBody EnderecoRequest enderecoRequest) {
+        try {
+            // Chamada assíncrona para obter dados do ViaCep
+            Future<ViaCepResponse> viaCepResponseFuture = enderecoServiceAsync.ObterEnderecoPorCepAsync(enderecoRequest.cep());
+
+            // Delegar a lógica de atualização para o EnderecoService
+            Endereco enderecoAtualizado = enderecoService.updateEnderecoUsingProcedure(id, enderecoRequest, viaCepResponseFuture);
+
+            // Converte Endereco para EnderecoResponseDTO para a resposta
+            EnderecoResponseDTO enderecoResponse = enderecoService.EnderecoToResponseDTO(enderecoAtualizado);
+
+            return new ResponseEntity<>(enderecoResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @DeleteMapping("/procedure/{id}")
+    public ResponseEntity<Void> deleteEndereco(@PathVariable Long id) {
+        enderecoService.deleteEnderecoUsingProcedure(id);
+        return ResponseEntity.ok().build(); // Retorna 204 No Content se a exclusão for bem-sucedida
+    }
+
+
 
 
 

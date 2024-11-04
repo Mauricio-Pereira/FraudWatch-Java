@@ -13,7 +13,7 @@ public class InicializadorDados {
     private TipoUsuarioService tipoUsuarioService;
 
     @PostConstruct
-    public void init() {
+    public void Init() {
         // Inicializa os tipos de usuário
         tipoUsuarioService.inicializarTiposUsuario();
     }
