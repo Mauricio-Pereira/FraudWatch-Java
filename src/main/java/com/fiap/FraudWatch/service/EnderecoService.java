@@ -257,7 +257,6 @@ public class EnderecoService {
         if (isLinked) {
             throw new EnderecoVinculadoException("Não é possível apagar um endereço vinculado a um usuário.");
         }
-
         try {
             enderecoRepository.deleteEnderecoById(idEndereco);
         } catch (Exception e) {
@@ -266,4 +265,16 @@ public class EnderecoService {
     }
 
 
+    public EnderecoRequest EnderecoToRequest(Endereco endereco) {
+        return new EnderecoRequest(
+                endereco.getCep(),
+                endereco.getLogradouro(),
+                endereco.getNumero(),
+                endereco.getComplemento(),
+                endereco.getBairro().getNomeBairro(),
+                endereco.getBairro().getCidade().getNomeCidade(),
+                endereco.getBairro().getCidade().getEstado().getNomeEstado(),
+                endereco.getBairro().getCidade().getEstado().getRegiao().getNomeRegiao()
+        );
+    }
 }

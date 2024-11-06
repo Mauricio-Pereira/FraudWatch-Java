@@ -1,5 +1,6 @@
 package com.fiap.FraudWatch.controller;
 
+import com.fiap.FraudWatch.dto.enderecoDto.EnderecoRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioLoginRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponseDTO;
@@ -38,7 +39,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
     @Autowired
     private UsuarioRepository usuarioRepository;
-    private Pageable pageable = PageRequest.of(0,4, Sort.by("nome").ascending());
+    private Pageable pageable = PageRequest.of(0,400, Sort.by("nome").ascending());
 
     @Operation(summary = "Criar um usuario")
     @ApiResponses(value = {
@@ -49,7 +50,7 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponseDTO> CreateUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest){
         Usuario usuarioConvertido = usuarioService.RequestToUsuario(usuarioRequest, usuarioRequest.endereco());
         Usuario usuarioCriado = usuarioRepository.save(usuarioConvertido);
-        UsuarioResponseDTO usuarioResponse = usuarioService.UsuarioToResponse(usuarioCriado);
+        UsuarioResponseDTO usuarioResponse = usuarioService.usuarioToResponse(usuarioCriado);
         return new ResponseEntity<>(usuarioResponse, HttpStatus.CREATED);
     }
 
@@ -67,7 +68,7 @@ public class UsuarioController {
             for (UsuarioRequest usuarioRequest : usuarioRequestList) {
                 Usuario usuarioConvertido = usuarioService.RequestToUsuario(usuarioRequest, usuarioRequest.endereco());
                 Usuario usuarioCriado = usuarioRepository.save(usuarioConvertido);
-                UsuarioResponseDTO usuarioResponse = usuarioService.UsuarioToResponse(usuarioCriado);
+                UsuarioResponseDTO usuarioResponse = usuarioService.usuarioToResponse(usuarioCriado);
                 usuarioResponseList.add(usuarioResponse);
                 successCount++;
             }
@@ -95,8 +96,8 @@ public class UsuarioController {
         }
         List<UsuarioResponse> usuarioResponseList = new ArrayList<>();
         for (Usuario usuario : usuarioPage) {
-            UsuarioResponseDTO usuarioResponseDTO = usuarioService.UsuarioToResponse(usuario);
-            UsuarioResponse usuarioResponse = usuarioService.UsuarioToResponse(usuario, linkTo(
+            UsuarioResponseDTO usuarioResponseDTO = usuarioService.usuarioToResponse(usuario);
+            UsuarioResponse usuarioResponse = usuarioService.usuarioToResponse(usuario, linkTo(
                     methodOn(UsuarioController.class)
                             .GetUsuarioById(usuarioResponseDTO.id())
             ).withSelfRel()
@@ -118,7 +119,7 @@ public class UsuarioController {
         if (usuarioSalvo.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        UsuarioResponse usuarioResponse = usuarioService.UsuarioToResponse(usuarioSalvo.get(), linkTo(
+        UsuarioResponse usuarioResponse = usuarioService.usuarioToResponse(usuarioSalvo.get(), linkTo(
                         methodOn(UsuarioController.class)
                                 .GetUsuarioById(id)
                 ).withSelfRel()
@@ -141,7 +142,7 @@ public class UsuarioController {
         Usuario usuarioConvertido = usuarioService.UpdateUsuario(id,usuarioRequest, usuarioRequest.endereco());
         usuarioConvertido.setId(id);
         Usuario usuarioAtualizado = usuarioRepository.save(usuarioConvertido);
-        UsuarioResponseDTO usuarioResponse = usuarioService.UsuarioToResponse(usuarioAtualizado);
+        UsuarioResponseDTO usuarioResponse = usuarioService.usuarioToResponse(usuarioAtualizado);
         return new ResponseEntity<>(usuarioResponse, HttpStatus.OK);
     }
 
@@ -175,7 +176,7 @@ public class UsuarioController {
         if (!usuario.get().getSenha().equals(usuarioLoginRequest.senha())) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        UsuarioResponseDTO usuarioResponse = usuarioService.UsuarioToResponse(usuario.get());
+        UsuarioResponseDTO usuarioResponse = usuarioService.usuarioToResponse(usuario.get());
         return new ResponseEntity<>(usuarioResponse, HttpStatus.OK);
     }
 
@@ -192,12 +193,51 @@ public class UsuarioController {
             Usuario usuario = usuarioService.createUsuarioWithProcedure(usuarioRequest);
 
             // Converte o usuário para o DTO de resposta
-            UsuarioResponseDTO usuarioResponse = usuarioService.UsuarioToResponse(usuario);
+            UsuarioResponseDTO usuarioResponse = usuarioService.usuarioToResponse(usuario);
 
             return ResponseEntity.status(201).body(usuarioResponse); // Retorna 201 Created
         } catch (RuntimeException e) {
             // Retorna uma resposta com erro, se algo falhar
             return ResponseEntity.badRequest().body(null); // Aqui você pode personalizar a resposta de erro
+        }
+    }
+
+    @Operation(summary = "Atualizar um usuario com procedure")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro na requisição")
+    })
+    @PutMapping("/procedure/{id}")
+    public ResponseEntity<UsuarioResponseDTO> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioRequest usuarioRequest) {
+        try {
+            // Chama o serviço para atualizar o usuário e o endereço
+            Usuario usuario = usuarioService.updateUsuarioWithProcedure(id, usuarioRequest);
+
+            // Converte o usuário para o DTO de resposta
+            UsuarioResponseDTO usuarioResponse = usuarioService.usuarioToResponse(usuario);
+
+            return ResponseEntity.ok(usuarioResponse); // Retorna 200 OK
+        } catch (RuntimeException e) {
+            // Retorna uma resposta com erro, se algo falhar
+            return ResponseEntity.badRequest().body(null); // Aqui você pode personalizar a resposta de erro
+        }
+    }
+
+    @Operation(summary = "Deletar um usuario com procedure")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario deletado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro na requisição")
+    })
+    @DeleteMapping("/procedure/{id}")
+    public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {
+        try {
+            // Chama o serviço para deletar o usuário e o endereço
+            usuarioService.deleteUsuarioWithProcedure(id);
+
+            return ResponseEntity.ok().build(); // Retorna 200 OK
+        } catch (RuntimeException e) {
+            // Retorna uma resposta com erro, se algo falhar
+            return ResponseEntity.badRequest().build(); // Aqui você pode personalizar a resposta de erro
         }
     }
 }
