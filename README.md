@@ -77,7 +77,100 @@ dados no banco, além de disponibilizar informações para aplicações web e mo
 
 ### Atividades da Sprint 2
 
-- *A serem definidas*
+
+#### Compliance & Quality Assurance
+
+| **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
+|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
+| Desenho da Arquitetura da Solução aplicando TOGAF usando Archi                                           | Maurício Vieira Pereira, Luis Otávio Leitão, Yago Lucas Gonçalves | 15/10                |
+| Desenvolvimento de funções de validação de entrada de dados                                               | Maurício Vieira Pereira                       | 20/10                |
+| Criação de procedures para operações CRUD com validação e tratamento de erros                             | Maurício Vieira Pereira                       | 25/10                |
+| Execução das procedures via aplicação Java e gravação do vídeo demonstrativo                              | Maurício Vieira Pereira                       | 30/10                |
+| Criação de funções com cursor e joins para relatório formatado                                             | Maurício Vieira Pereira                       | 05/11                |
+| Desenvolvimento de funções para relatório com regra de negócio específica                                 | Maurício Vieira Pereira                       | 07/11                |
+| Revisão e finalização da documentação de QA e Compliance                                                 | Yago Lucas Gonçalves                          | 08/11                |
+
+#### Mastering Relational and Non-Relational Database
+
+| **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
+|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
+| Implementação das correções no modelo de dados anterior conforme feedback                                | Maurício Vieira Pereira                       | 12/10                |
+| Desenvolvimento de funções de validação de entrada de dados (2 funções)                                   | Maurício Vieira Pereira                       | 20/10                |
+| Criação de procedures para operações CRUD com validação e tratamento de erros                             | Maurício Vieira Pereira                       | 25/10                |
+| Execução das procedures via aplicação Java e demonstração em vídeo                                        | Maurício Vieira Pereira                       | 30/10                |
+| Criação de função com cursor e joins para relatório formatado                                              | Maurício Vieira Pereira                       | 05/11                |
+| Desenvolvimento de função para relatório com regra de negócio específica                                   | Maurício Vieira Pereira                       | 07/11                |
+| Preparação do arquivo ZIP com PDFs, link do vídeo e scripts SQL                                           | Maurício Vieira Pereira                       | 08/11                |
+
+#### DevOps Tools e Cloud Computing
+
+| **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
+|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
+| Provisionamento de recursos no provedor de Nuvem (Azure) e deployment de máquinas virtuais                | Luis Otávio Leitão                             | 15/10                |
+| Configuração do monitoramento da saúde da VM, desempenho e dependências de rede                            | Luis Otávio Leitão                             | 18/10                |
+| Instalação do Docker nas máquinas virtuais e criação de Dockerfile                                       | Luis Otávio Leitão                             | 22/10                |
+| Configuração do Docker Compose para deployment das imagens Docker                                          | Luis Otávio Leitão                             | 25/10                |
+| Organização e estruturação dos arquivos de deployment no repositório GitHub                                | Luis Otávio Leitão                             | 28/10                |
+| Criação de scripts para deleção do grupo de recursos da VM e anexação das evidências                       | Luis Otávio Leitão                             | 05/11                |
+| Documentação detalhada do processo de deployment e utilização de Docker                                   | Luis Otávio Leitão                             | 07/11                |
+| Preparação do arquivo PDF com nomes, RMs, links do repositório GitHub e vídeo demonstrativo                | Luis Otávio Leitão                             | 08/11                |
+
+#### Business Development with .NET
+
+| **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
+|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
+| Atualização da descrição geral do projeto no README.md para refletir o progresso e novas funcionalidades | Luis Otávio Leitão                             | 10/10                |
+| Configuração das rotas padrão para as páginas da aplicação web                                           | Luis Otávio Leitão                             | 12/10                |
+| Implementação de rotas personalizadas na aplicação web                                                    | Luis Otávio Leitão                             | 15/10                |
+| Desenvolvimento do layout principal da aplicação com cabeçalho, rodapé e navegação customizada usando Bootstrap | Luis Otávio Leitão                             | 20/10                |
+| Desenvolvimento das views correspondentes às principais funcionalidades com validações das viewmodels     | Luis Otávio Leitão                             | 25/10                |
+| Criação de ViewModels para transferência de dados entre a camada de apresentação e lógica de negócio      | Luis Otávio Leitão                             | 28/10                |
+| Implementação dos controladores para manipulação de requisições HTTP e ações CRUD                         | Luis Otávio Leitão                             | 02/11                |
+| Testes e validação das funcionalidades implementadas na camada web                                         | Luis Otávio Leitão                             | 05/11                |
+| Atualização da documentação no README.md com novas instruções e funcionalidades                           | Luis Otávio Leitão                             | 07/11                |
+
+#### Disruptive Architectures: IoT, IOB & Generative IA
+
+| **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
+|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
+| Desenvolvimento da versão Beta do projeto com funcionalidades principais                                 | Yago Lucas Gonçalves                          | 20/10                |
+| Apresentação das diferenças entre a etapa atual e a proposta inicial                                     | Yago Lucas Gonçalves                          | 22/10                |
+| Detalhamento dos frameworks/bibliotecas Python, APIs e ferramentas a serem utilizadas                    | Yago Lucas Gonçalves                          | 25/10                |
+| Explicação do funcionamento dos recursos/ferramentas dentro da aplicação                                  | Yago Lucas Gonçalves                          | 28/10                |
+| Descrição da aplicação de conceitos de Machine Learning / IA no projeto                                   | Yago Lucas Gonçalves                          | 30/10                |
+| Organização e atualização da documentação no repositório GitHub                                           | Yago Lucas Gonçalves                          | 02/11                |
+| Gravação e upload do vídeo demonstrativo das funcionalidades do projeto                                   | Yago Lucas Gonçalves                          | 05/11                |
+| Preparação do arquivo ZIP com link do repositório, vídeo e documentação organizada                        | Yago Lucas Gonçalves                          | 08/11                |
+
+#### Java Advanced
+
+| **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
+|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
+| Aperfeiçoamento da aplicação Java com Spring Boot, incluindo refatorações de código                       | Maurício Vieira Pereira                       | 12/10                |
+| Implementação da parte relacionada com HATEOAS para atingir o nível de maturidade 3 do modelo de Richardson | Maurício Vieira Pereira                       | 18/10                |
+| Implementação opcional do uso de Lombok para otimização do código                                        | Maurício Vieira Pereira                       | 20/10                |
+| Continuação da gestão de configuração dos artefatos no GitHub                                            | Maurício Vieira Pereira                       | 22/10                |
+| Desenvolvimento de novos testes para os endpoints da API utilizando Postman ou Insomnia                   | Maurício Vieira Pereira                       | 25/10                |
+| Exportação das requisições do Postman para validação dos professores                                      | Maurício Vieira Pereira                       | 28/10                |
+| Atualização do cronograma de desenvolvimento e documentação da Sprint 2                                   | Maurício Vieira Pereira                       | 30/10                |
+| Revisão e finalização das implementações avançadas na aplicação Java                                      | Maurício Vieira Pereira                       | 05/11                |
+| Preparação do arquivo README.md atualizado com novas informações e documentação completa                 | Maurício Vieira Pereira                       | 07/11                |
+| Garantia de conformidade com os conceitos REST e documentação dos endpoints no GitHub                     | Maurício Vieira Pereira                       | 08/11                |
+
+#### Mobile App Development
+
+| **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
+|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
+| Criação do diagrama de integração/comunicação do aplicativo com APIs/banco de dados e sistemas externos   | Yago Lucas Gonçalves                          | 15/10                |
+| Desenvolvimento visual de 5 telas funcionais do aplicativo mobile                                         | Yago Lucas Gonçalves                          | 25/10                |
+| Implementação das chamadas à API em pelo menos 3 telas do aplicativo                                       | Yago Lucas Gonçalves                          | 30/10                |
+| Aplicação de layout adequado e garantia de bom nível de usabilidade                                       | Yago Lucas Gonçalves                          | 05/11                |
+| Testes das funcionalidades implementadas no aplicativo mobile                                             | Yago Lucas Gonçalves                          | 07/11                |
+| Preparação do documento do Word com imagens, explicações, nomes completos e RMs dos integrantes          | Yago Lucas Gonçalves                          | 08/11                |
+| Atualização do repositório GitHub com o código do aplicativo e documentação                                | Yago Lucas Gonçalves                          | 08/11                |
+| Gravação e upload do vídeo demonstrativo do funcionamento do aplicativo                                   | Yago Lucas Gonçalves                          | 08/11                |
+| Geração e disponibilização do APK para instalação                                                        | Yago Lucas Gonçalves                          | 08/11                |
+
 
 ---
 ### Arquitetura do Projeto
