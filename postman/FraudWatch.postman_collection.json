@@ -11,6 +11,113 @@
 			"name": "USUARIOS",
 			"item": [
 				{
+					"name": "WITH PROCEDURES",
+					"item": [
+						{
+							"name": "CREATE USUARIO WITH ENDERECO WITH PROCEDURE",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"João 1\",\r\n  \"sobrenome\": \"Silva 1\",\r\n  \"email\": \"joaosilva1@example.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"cpf\": \"99988877755\",\r\n  \"dataNascimento\": \"1990-01-01\",\r\n  \"telefone\": \"1199999-9999\",\r\n  \"tipoUsuarioid\": 2,\r\n  \"endereco\": {\r\n    \"cep\": \"37460-000\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"numero\": \"123\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\",\r\n    \"regiao\": \"Sudeste\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/usuario/procedure",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuario",
+										"procedure"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE USUARIO BY ID Copy",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"João 6\",\r\n  \"sobrenome\": \"Silva 6\",\r\n  \"email\": \"joaosilva456789000@example.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"cpf\": \"99988877755\",\r\n  \"dataNascimento\": \"1990-01-01\",\r\n  \"telefone\": \"1199999-9999\",\r\n  \"tipoUsuarioid\": 2,\r\n  \"endereco\": {\r\n    \"cep\": \"01001-000\",\r\n    \"logradouro\": \"Rua Exemplo\",\r\n    \"numero\": \"123\",\r\n    \"complemento\": \"Apto 101\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\",\r\n    \"regiao\": \"Sudeste\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/usuario/procedure/70",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuario",
+										"procedure",
+										"70"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE USUARIO BY ID Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/usuario/procedure/70",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuario",
+										"procedure",
+										"70"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "CREATE USUARIO WITH ENDERECO",
 					"event": [
 						{
@@ -141,7 +248,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/usuario/page/0",
+							"raw": "http://localhost:8080/usuario/page/11",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -150,7 +257,7 @@
 							"path": [
 								"usuario",
 								"page",
-								"0"
+								"11"
 							]
 						}
 					},
@@ -162,7 +269,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/usuario/1",
+							"raw": "http://localhost:8080/usuario/70",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -170,7 +277,7 @@
 							"port": "8080",
 							"path": [
 								"usuario",
-								"1"
+								"70"
 							]
 						}
 					},
@@ -210,6 +317,91 @@
 		{
 			"name": "ENDERECOS",
 			"item": [
+				{
+					"name": "WITH PROCEDURES",
+					"item": [
+						{
+							"name": "CREATE ENDERECO USING PROCEDURE",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"cep\": \"37460-000\",\r\n  \"logradouro\": \"Avenida josé inácio de siqueira\",\r\n  \"bairro\": \"Centro\",\r\n  \"cidade\": \"São Paulooo\",\r\n  \"estado\": \"São Paulo\",\r\n  \"regiao\": \"Região Sudeste\",\r\n  \"complemento\": \"Apartamento 101\",\r\n  \"numero\": \"25\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/endereco/procedure",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"endereco",
+										"procedure"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE ENDERECO BY ID USING PROCEDURE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"cep\": \"37460-000\",\r\n  \"logradouro\": \"Avenida José Inácio de \",\r\n  \"bairro\": \"Séaasds\",\r\n  \"cidade\": \"São Paulooo\",\r\n  \"estado\": \"São Paulo\",\r\n  \"regiao\": \"Sudeste\",\r\n  \"complemento\": null,\r\n  \"numero\": \"132\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/endereco/procedure/93",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"endereco",
+										"procedure",
+										"93"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE ENDERECO BY ID USING PROCEDURE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/endereco/procedure/93",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"endereco",
+										"procedure",
+										"93"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "CREATE ENDERECO",
 					"request": {
@@ -282,7 +474,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/endereco/1",
+							"raw": "http://localhost:8080/endereco/24",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -290,7 +482,7 @@
 							"port": "8080",
 							"path": [
 								"endereco",
-								"1"
+								"24"
 							]
 						}
 					},
@@ -322,7 +514,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/endereco/page/0",
+							"raw": "http://localhost:8080/endereco/page/12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -331,7 +523,7 @@
 							"path": [
 								"endereco",
 								"page",
-								"0"
+								"12"
 							]
 						}
 					},
@@ -355,7 +547,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/endereco/1",
+							"raw": "http://localhost:8080/endereco/92",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -363,7 +555,7 @@
 							"port": "8080",
 							"path": [
 								"endereco",
-								"1"
+								"92"
 							]
 						}
 					},
