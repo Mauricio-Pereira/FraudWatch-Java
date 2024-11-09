@@ -229,6 +229,8 @@ operação.
 Os corpos das requisições e respostas (JSON) estarão disponíveis no arquivo do Postman, no diretório: `/postman/FraudWatch.postman_collection.json`.
 O arquivo também contém exemplos de requisições para cada endpoint assim como os endpoints de teste.
 
+## Endpoints Localhost
+
 **_USUARIO_**
 
 | Método | Endpoint                                                                                                    | Descrição                                                | Corpo da Requisição |
@@ -264,6 +266,47 @@ O arquivo também contém exemplos de requisições para cada endpoint assim com
 | POST               | `http://localhost:8080/endereco/procedure`  | Cria um novo endereço com validação de CEP, número e complemento no banco de dados                         | JSON (no Postman)   |
 | PUT                | `http://localhost:8080/endereco/procedure/{id}` | Atualiza as informações de um endereço por ID com validação de CEP, número e complemento no banco de dados | JSON (no Postman)   |
 | DELETE             | `http://localhost:8080/endereco/procedure/{id}` | Deleta um endereço específico por ID; Não permite deletar endereços associados a usuários no banco de dados | -                   |
+
+## Endpoints máquina virtual
+
+### Usuário Endpoints
+
+| Método | Endpoint                                                                                              | Descrição                                                | Corpo da Requisição |
+|--------|-------------------------------------------------------------------------------------------------------|----------------------------------------------------------|----------------------|
+| POST   | `http://191.235.233.101:8080/usuario`                                                                 | Cria um novo usuário                                     | JSON (no Postman)    |
+| POST   | `http://191.235.233.101:8080/usuario/list`                                                            | Cria vários usuários de uma vez                          | JSON (no Postman)    |
+| GET    | `http://191.235.233.101:8080/usuario/page{page}`                                                      | Lista todos os usuários paginados (4 usuários por página) | -                    |
+| GET    | `http://191.235.233.101:8080/usuario/{id}`                                                            | Busca um usuário específico por ID                       | -                    |
+| PUT    | `http://191.235.233.101:8080/usuario/{id}`                                                            | Atualiza as informações de um usuário por ID             | JSON (no Postman)    |
+| DELETE | `http://191.235.233.101:8080/usuario/{id}`                                                            | Deleta um usuário específico por ID                      | -                    |
+
+### Usuário Endpoints com Procedures
+
+| Método | Endpoint                                                                                              | Descrição                                                                                          | Corpo da Requisição |
+|--------|-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|----------------------|
+| POST   | `http://191.235.233.101:8080/usuario/procedure`                                                       | Cria um novo usuário com validação de CPF, email e senha no banco de dados                         | JSON (no Postman)    |
+| PUT    | `http://191.235.233.101:8080/usuario/procedure/{id}`                                                  | Atualiza as informações de um usuário por ID com validação de CPF, email e senha no banco de dados | JSON (no Postman)    |
+| DELETE | `http://191.235.233.101:8080/usuario/procedure/{id}`                                                  | Deleta um usuário específico por ID e apaga os endereços associados no banco de dados              | -                    |
+
+### Endereço Endpoints
+
+| Método | Endpoint                                                                                              | Descrição                                                  | Corpo da Requisição |
+|--------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------|----------------------|
+| POST   | `http://191.235.233.101:8080/endereco`                                                                | Cria um novo endereço                                      | JSON (no Postman)    |
+| POST   | `http://191.235.233.101:8080/endereco/list`                                                           | Cria vários endereços de uma vez                           | JSON (no Postman)    |
+| GET    | `http://191.235.233.101:8080/endereco/page/{page}`                                                    | Lista todos os endereços paginados (4 endereços por página) | -                    |
+| GET    | `http://191.235.233.101:8080/endereco/{id}`                                                           | Busca um endereço específico por ID                        | -                    |
+| PUT    | `http://191.235.233.101:8080/endereco/{id}`                                                           | Atualiza as informações de um endereço por ID              | JSON (no Postman)    |
+| DELETE | `http://191.235.233.101:8080/endereco/{id}`                                                           | Deleta um endereço específico por ID                       | -                    |
+
+### Endereço Endpoints com Procedures
+
+| Método | Endpoint                                                                                              | Descrição                                                                                                  | Corpo da Requisição |
+|--------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------|
+| POST   | `http://191.235.233.101:8080/endereco/procedure`                                                      | Cria um novo endereço com validação de CEP, número e complemento no banco de dados                         | JSON (no Postman)    |
+| PUT    | `http://191.235.233.101:8080/endereco/procedure/{id}`                                                 | Atualiza as informações de um endereço por ID com validação de CEP, número e complemento no banco de dados | JSON (no Postman)    |
+| DELETE | `http://191.235.233.101:8080/endereco/procedure/{id}`                                                 | Deleta um endereço específico por ID; Não permite deletar endereços associados a usuários no banco de dados | -                    |
+
 
 Essa tabela resume os endpoints da API FraudWatch, indicando quais operações estão disponíveis e quais exigem um corpo
 de requisição em JSON, disponível no Postman.
