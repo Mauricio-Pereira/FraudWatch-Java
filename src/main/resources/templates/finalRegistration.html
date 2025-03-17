@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FraudWatch - Confirme seus Dados</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/finalRegistration.css}" />
+</head>
+<body>
+<!-- Inclui o header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container">
+    <h2>Confirme seus Dados</h2>
+
+    <!-- Dados Pessoais e da Conta -->
+    <div class="data-container">
+        <div class="data-item">
+            <span class="label">Nome:</span>
+            <span class="value" th:text="${usuarioRequest.nome}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Sobrenome:</span>
+            <span class="value" th:text="${usuarioRequest.sobrenome}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Email:</span>
+            <span class="value" th:text="${usuarioRequest.email}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">CPF:</span>
+            <span class="value" th:text="${usuarioRequest.cpf}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Data de Nascimento:</span>
+            <span class="value" th:text="${usuarioRequest.dataNascimento}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Telefone:</span>
+            <span class="value" th:text="${usuarioRequest.telefone}"></span>
+        </div>
+    </div>
+
+    <!-- Dados do Endereço -->
+    <h3>Endereço</h3>
+    <div class="data-container">
+        <div class="data-item">
+            <span class="label">CEP:</span>
+            <span class="value" th:text="${usuarioRequest.endereco.cep}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Logradouro:</span>
+            <span class="value" th:text="${usuarioRequest.endereco.logradouro}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Bairro:</span>
+            <span class="value" th:text="${usuarioRequest.endereco.bairro}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Cidade:</span>
+            <span class="value" th:text="${usuarioRequest.endereco.cidade}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Estado:</span>
+            <span class="value" th:text="${usuarioRequest.endereco.estado}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Região:</span>
+            <span class="value" th:text="${usuarioRequest.endereco.regiao}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Número:</span>
+            <span class="value" th:text="${usuarioRequest.endereco.numero}"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Complemento:</span>
+            <span class="value" th:text="${usuarioRequest.endereco.complemento}"></span>
+        </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="button-container">
+        <form th:action="@{/create-account/register}" method="post" style="display:inline">
+            <button type="submit" class="confirm-button">Confirmar</button>
+        </form>
+        <a th:href="@{/create-account}" class="edit-button">Editar</a>
+    </div>
+</div>
+</body>
+</html>

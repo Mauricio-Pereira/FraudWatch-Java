@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<!-- Fragmento de Header -->
+<div th:fragment="header">
+
+    <div class="header">
+        <div class="header-left">
+            <a th:href="@{/}" style="text-decoration: none;">
+                <div class="header-brand">
+                    <span class="header-title">FraudWatch</span>
+                    <img src="/images/fraudwatch-logo.png" alt="FraudWatch Logo" class="logo-min"/>
+                </div>
+            </a>
+        </div>
+<!--        <div class="header-right">-->
+<!--            <a th:href="@{/login}" class="header-login-button">Login</a>-->
+<!--        </div>-->
+    </div>
+</div>
+
+</body>
+</html>

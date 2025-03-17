@@ -1,0 +1,156 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #D6E8FF; /* secondary */
+    color: #333333; /* text */
+}
+
+/* Container */
+.login-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #D6E8FF; /* secondary */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 35px 45px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Logo */
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+}
+
+/* Labels */
+.label {
+    display: block;
+    font-size: 14px;
+    color: #333333;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* Inputs */
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #0B1E51; /* primary */
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.input::placeholder {
+    color: #999999;
+}
+
+/* Botão de Login */
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #0B1E51; /* primary */
+    border: none;
+    border-radius: 24px;
+    color: #FFF;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #093a80;
+}
+
+/* Botão de Criar Conta */
+.create-account-button {
+    display: inline-block;
+    padding: 14px 24px;
+    background-color: #98C1FF; /* tertiary */
+    border-radius: 24px;
+    color: #333333;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.create-account-button:hover {
+    background-color: #80aaff;
+}
+
+
+/* HEADER */
+/* Estilo do header */
+.header {
+    background-color: #0B1E51; /* Cor primary */
+    color: white;
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: space-between;
+    padding: 16px 20px;
+    min-height: 100px;
+    width: 100%;
+}
+
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    /*tirar o sublinhado do link*/
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.header-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+    color: white;
+}
+/*a hover para title*/
+.header-title:hover {
+    color: white;
+}
+.logo-min {
+    max-height: 50px !important;
+    max-width: 50px !important;
+    object-fit: contain;
+}
+
+.header-right a {
+    background-color: #FFF;
+    color: #0B1E51;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    min-height: 40px;
+    min-width: 80px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.header-right a:hover {
+    background-color: #e0e0e0;
+}
+
+

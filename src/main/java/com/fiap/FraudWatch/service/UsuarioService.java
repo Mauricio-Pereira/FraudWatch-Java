@@ -2,9 +2,8 @@ package com.fiap.FraudWatch.service;
 
 import com.fiap.FraudWatch.dto.enderecoDto.EnderecoRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioRequest;
-import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponseDTO;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponse;
-import com.fiap.FraudWatch.dto.viaCepDto.ViaCepResponse;
+import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponseDTO;
 import com.fiap.FraudWatch.exception.CpfJaCadastradoException;
 import com.fiap.FraudWatch.exception.EmailJaCadastradoException;
 import com.fiap.FraudWatch.model.Endereco;
@@ -25,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.concurrent.Future;
 
 @Service
 public class UsuarioService {

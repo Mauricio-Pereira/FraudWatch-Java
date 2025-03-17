@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FraudWatch - Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<div class="login-container">
+    <div class="logo-container">
+        <img th:src="@{/images/fraudwatch-logo.png}" alt="FraudWatch Logo" class="logo" />
+    </div>
+    <form th:action="@{/home}" method="get">
+        <label for="email" class="label">Email</label>
+        <input type="email" id="email" name="email" placeholder="email@exemplo.com" class="input" required />
+
+        <label for="senha" class="label">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="digite a sua senha" class="input" required />
+
+        <button type="submit" class="login-button">Entrar</button>
+    </form>
+    <div class="create-account">
+        <a th:href="@{/create-account}" class="create-account-button">Criar conta</a>
+    </div>
+</div>
+</body>
+</html>
