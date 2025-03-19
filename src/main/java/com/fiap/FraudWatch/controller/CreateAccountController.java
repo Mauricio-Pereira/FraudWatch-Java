@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -55,60 +56,86 @@ public class CreateAccountController {
     // Processa o formulário unificado e finaliza o cadastro
     @PostMapping("/final-registration")
     public String finalizeRegistration(
-            @Valid @ModelAttribute UsuarioRequest usuarioRequest,
-            BindingResult result,
-            Model model,
-            RedirectAttributes redirectAttributes) {
-
-        if (result.hasErrors()) {
-            return "registrationForm";
+            @RequestParam("nome") String nome,
+            @RequestParam("sobrenome") String sobrenome,
+            @RequestParam("email") String email,
+            @RequestParam("senha") String senha,
+            @RequestParam("cpf") String cpf,
+            @RequestParam("dataNascimento") String dataNascimentoStr,
+            @RequestParam("telefone") String telefone,
+            @RequestParam("tipoUsuarioid") Long tipoUsuarioid,
+            @RequestParam("endereco.cep") String cep,
+            @RequestParam("endereco.logradouro") String logradouro,
+            @RequestParam("endereco.bairro") String bairro,
+            @RequestParam("endereco.cidade") String cidade,
+            @RequestParam("endereco.estado") String estado,
+            @RequestParam("endereco.regiao") String regiao,
+            @RequestParam("endereco.numero") String numero,
+            @RequestParam(value = "endereco.complemento", required = false) String complemento,
+            RedirectAttributes redirectAttributes
+    ) {
+        // Validação básica: se o CEP (campo obrigatório do endereço) estiver vazio, rejeita a submissão
+        if (cep == null || cep.trim().isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "CEP é obrigatório.");
+            return "redirect:/create-account";
         }
+        LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr);
+        EnderecoRequest endereco = new EnderecoRequest(cep, logradouro, bairro, cidade, estado, regiao, complemento, numero);
+        UsuarioRequest usuarioRequest = new UsuarioRequest(nome, sobrenome, email, senha, cpf, dataNascimento, telefone, tipoUsuarioid, endereco);
 
-        // Se não houver erros, adiciona o objeto usuarioRequest como atributo flash
+        // Armazena o objeto no flash para exibição na página de confirmação
         redirectAttributes.addFlashAttribute("usuarioRequest", usuarioRequest);
-
         return "redirect:/create-account/final-registration";
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.setAutoGrowNestedPaths(false);
-    }
 
     @GetMapping("/final-registration")
     public String showFinalRegistration(Model model) {
-        // Se o objeto não estiver presente, redireciona para o formulário
         if (!model.containsAttribute("usuarioRequest")) {
             return "redirect:/create-account";
         }
-
-        // Obtém o objeto usuarioRequest do atributo flash
-        UsuarioRequest usuarioRequest =
-                (UsuarioRequest) model.getAttribute("usuarioRequest");
-        System.out.println(usuarioRequest);
         return "finalRegistration";
     }
 
     // Processa o formulário unificado e finaliza o cadastro
     @PostMapping("/register")
     public String register(
-            @Valid @ModelAttribute UsuarioRequest usuarioRequest,
-            BindingResult result,
-            Model model,
-            RedirectAttributes redirectAttributes) {
-
-        if (result.hasErrors()) {
-            return "registrationForm";
-        }
-        //usa o service para salvar o usuario
+            @RequestParam("nome") String nome,
+            @RequestParam("sobrenome") String sobrenome,
+            @RequestParam("email") String email,
+            @RequestParam("senha") String senha,
+            @RequestParam("cpf") String cpf,
+            @RequestParam("dataNascimento") String dataNascimentoStr,
+            @RequestParam("telefone") String telefone,
+            @RequestParam("tipoUsuarioid") Long tipoUsuarioid,
+            @RequestParam("endereco.cep") String cep,
+            @RequestParam("endereco.logradouro") String logradouro,
+            @RequestParam("endereco.bairro") String bairro,
+            @RequestParam("endereco.cidade") String cidade,
+            @RequestParam("endereco.estado") String estado,
+            @RequestParam("endereco.regiao") String regiao,
+            @RequestParam("endereco.numero") String numero,
+            @RequestParam(value = "endereco.complemento", required = false) String complemento,
+            RedirectAttributes redirectAttributes
+    ) {
+        LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr);
+        EnderecoRequest endereco = new EnderecoRequest(cep, logradouro, bairro, cidade, estado, regiao, complemento, numero);
+        UsuarioRequest usuarioRequest = new UsuarioRequest(nome, sobrenome, email, senha, cpf, dataNascimento, telefone, tipoUsuarioid, endereco);
         try {
-            Usuario usuario =
-                    usuarioService.createUsuarioWithProcedure(usuarioRequest);
+            Usuario usuario = usuarioService.createUsuarioWithProcedure(usuarioRequest);
             System.out.println(usuario);
+            redirectAttributes.addFlashAttribute("popupMessage", "Usuário cadastrado com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
-            // Se não houver erros, adiciona o objeto usuarioRequest como atributo flash
+            redirectAttributes.addFlashAttribute("popupMessage", "Erro ao cadastrar usuário. Tente novamente.");
         }
-        return "redirect:/";
+        return "redirect:/create-account/popup";
     }
+
+    @GetMapping("/popup")
+    public String showPopup() {
+        return "popup"; // Certifique-se de que exista um arquivo popup.html em resources/templates
+    }
+
+
 }

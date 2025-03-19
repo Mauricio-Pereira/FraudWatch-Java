@@ -11,7 +11,7 @@
     <div class="logo-container">
         <img th:src="@{/images/fraudwatch-logo.png}" alt="FraudWatch Logo" class="logo" />
     </div>
-    <form th:action="@{/home}" method="get">
+    <form th:action="@{/login}" method="post">
         <label for="email" class="label">Email</label>
         <input type="email" id="email" name="email" placeholder="email@exemplo.com" class="input" required />
 
@@ -20,6 +20,7 @@
 
         <button type="submit" class="login-button">Entrar</button>
     </form>
+    <div th:if="${error}" class="error" th:text="${error}"></div>
     <div class="create-account">
         <a th:href="@{/create-account}" class="create-account-button">Criar conta</a>
     </div>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuários Cadastrados</title>
+    <link rel="stylesheet" th:href="@{/css/userList.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container">
+    <h2>Usuários Cadastrados</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario : ${usuariosPage.content}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.nome}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td>
+                <a th:href="@{'/users/edit/' + ${usuario.id}}" class="edit-button">Editar</a>
+
+                <!-- Botão de deletar com evento JavaScript -->
+                <button class="delete-button" th:attr="data-id=${usuario.id}" onclick="deleteUsuario(this)">
+                    Deletar
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Botão para atualizar a lista -->
+    <div class="button-container">
+        <a th:href="@{'/users?page=' + ${usuariosPage.number}}" class="update-button">Atualizar Lista</a>
+    </div>
+
+    <!-- Paginação -->
+    <div class="pagination">
+        <a th:if="${usuariosPage.hasPrevious()}" th:href="@{/users(page=${usuariosPage.number - 1})}">Anterior</a>
+        <span th:text="'Página ' + (${usuariosPage.number} + 1) + ' de ' + ${usuariosPage.totalPages}"></span>
+        <a th:if="${usuariosPage.hasNext()}" th:href="@{/users(page=${usuariosPage.number + 1})}">Próxima</a>
+    </div>
+
+</div>
+
+<script>
+    function deleteUsuario(button) {
+        let userId = button.getAttribute("data-id");
+
+        if (confirm("Tem certeza que deseja excluir este usuário?")) {
+            fetch('/home/usuario/' + userId, { // Usando a nova rota corrigida
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Usuário excluído com sucesso.");
+                        location.reload(); // Atualiza a página
+                    } else {
+                        return response.text().then(text => { throw new Error(text); });
+                    }
+                })
+                .catch(error => alert("Erro ao excluir usuário: " + error.message));
+        }
+    }
+</script>
+
+</body>
+</html>

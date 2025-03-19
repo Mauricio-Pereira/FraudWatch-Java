@@ -2,6 +2,8 @@ package com.fiap.FraudWatch.repository;
 
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponseDTO;
 import com.fiap.FraudWatch.model.Usuario;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -15,7 +17,11 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByCpf(String cpf);
+
     Optional<Usuario> findByEmail(String email);
+
+    Page<Usuario> findByEmailNot(String email, Pageable pageable);
+
 
     boolean existsByEnderecoId(Long enderecoId);
 
@@ -41,4 +47,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Transactional
     @Procedure(procedureName = "delete_usuario")
     void deleteUsuarioById(Long idUsuario);
+
+    Usuario getUsuarioByEmail(String email);
 }
