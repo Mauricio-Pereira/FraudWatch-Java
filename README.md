@@ -24,6 +24,10 @@ dados no banco, além de disponibilizar informações para aplicações web e mo
     - Desenvolvedor da aplicação mobile em Kotlin, além de ser o responsável pela criação de um modelo de Machine
       Learning para detecção de fraudes. Atua também na documentação e qualidade de software (QA).
 
+      
+## <u>*--------------------------IMPORTANTE--------------------------*</u>
+### <u>*Na tela de cadastro de usuário do projeto spring mvc, apesar de ser apenas 1 unica tela, são 2 cruds feitos de forma simultânea, um de endereço e outro de usuário, pois um não pode existir no sistema sem o outro!*</u>
+
 ## Cronograma
 
 ### Atividades da Sprint 1
