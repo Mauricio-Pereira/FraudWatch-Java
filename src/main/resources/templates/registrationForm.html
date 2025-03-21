@@ -3,43 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>FraudWatch - Cadastro Completo</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/createAccount.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/createAccount.css}"/>
     <style>
-        /* Exemplo de estilos para mensagens de erro e validação */
-        .error { color: red; font-size: 0.9em; }
-        .valid { color: green; font-size: 0.9em; }
-        .invalid { color: red; font-size: 0.9em; }
-        ul.criteria { list-style: none; padding-left: 0; }
-        ul.criteria li::before { content: "✖ "; color: red; }
-        ul.criteria li.valid::before { content: "✔ "; color: green; }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        .valid {
+            color: green;
+            font-size: 0.9em;
+        }
+
+        .invalid {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        ul.criteria {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.criteria li::before {
+            content: "✖ ";
+            color: red;
+        }
+
+        ul.criteria li.valid::before {
+            content: "✔ ";
+            color: green;
+        }
     </style>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 <div class="form-container">
     <h2>Cadastro Completo</h2>
-    <!-- Removido th:object -->
     <form th:action="@{/create-account/final-registration}" method="post" id="combinedForm">
-        <!-- Tipo de usuário sempre 1 -->
-        <input type="hidden" name="tipoUsuarioid" value="1" />
+        <input type="hidden" name="tipoUsuarioid" value="1"/>
 
         <!-- Dados Pessoais -->
         <fieldset>
             <legend>Dados Pessoais</legend>
             <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required />
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required/>
             <div class="error" id="nomeError"></div>
 
             <label for="sobrenome">Sobrenome</label>
-            <input type="text" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome" required />
+            <input type="text" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome" required/>
             <div class="error" id="sobrenomeError"></div>
 
             <label for="cpf">CPF</label>
-            <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" required />
+            <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" required/>
             <div class="error" id="cpfError"></div>
 
             <label for="dataNascimento">Data de Nascimento</label>
-            <input type="date" id="dataNascimento" name="dataNascimento" required />
+            <input type="date" id="dataNascimento" name="dataNascimento" required/>
             <div class="error" id="dataNascimentoError"></div>
         </fieldset>
 
@@ -47,16 +67,17 @@
         <fieldset>
             <legend>Dados da Conta</legend>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="email@exemplo.com" required />
+            <input type="email" id="email" name="email" placeholder="email@exemplo.com" required/>
             <div class="error" id="emailError"></div>
 
             <label for="telefone">Telefone</label>
-            <input type="text" id="telefone" name="telefone" placeholder="(xx) xxxxx-xxxx" required />
+            <input type="text" id="telefone" name="telefone" placeholder="(xx) xxxxx-xxxx" required/>
             <div class="error" id="telefoneError"></div>
 
             <label for="senha">Senha</label>
-            <input type="password" id="senha" name="senha" placeholder="Mínimo de 8 dígitos" required />
+            <input type="password" id="senha" name="senha" placeholder="Mínimo de 8 dígitos" required/>
             <div class="error" id="senhaError"></div>
+
             <!-- Lista de critérios para a senha -->
             <ul class="criteria" id="passwordCriteria">
                 <li id="minLength">Mínimo 8 caracteres</li>
@@ -68,7 +89,7 @@
             </ul>
 
             <label for="confirmSenha">Confirmar Senha</label>
-            <input type="password" id="confirmSenha" name="confirmSenha" placeholder="Confirme sua senha" required />
+            <input type="password" id="confirmSenha" name="confirmSenha" placeholder="Confirme sua senha" required/>
             <div class="error" id="confirmSenhaError"></div>
         </fieldset>
 
@@ -76,45 +97,51 @@
         <fieldset>
             <legend>Endereço</legend>
             <label for="cep">CEP</label>
-            <input type="text" id="cep" name="endereco.cep" placeholder="Digite seu CEP" required />
+            <input type="text" id="cep" name="endereco.cep" placeholder="Digite seu CEP" required/>
             <div class="error" id="cepError"></div>
 
+            <label for="regiao">Região</label>
+            <input type="text" id="regiao" placeholder="Região" required disabled/>
+            <input type="hidden" id="regiaoHidden" name="endereco.regiao"/>
+
             <label for="estado">Estado</label>
-            <!-- Os campos visuais estão desabilitados, mas os hidden serão enviados -->
-            <input type="text" id="estado" placeholder="Estado" required disabled />
-            <input type="hidden" id="estadoHidden" name="endereco.estado" />
+            <input type="text" id="estado" placeholder="Estado" required disabled/>
+            <input type="hidden" id="estadoHidden" name="endereco.estado"/>
 
             <label for="cidade">Cidade</label>
-            <input type="text" id="cidade" placeholder="Cidade" required disabled />
-            <input type="hidden" id="cidadeHidden" name="endereco.cidade" />
+            <input type="text" id="cidade" placeholder="Cidade" required disabled/>
+            <input type="hidden" id="cidadeHidden" name="endereco.cidade"/>
 
             <label for="bairro">Bairro</label>
-            <input type="text" id="bairro" placeholder="Bairro" required disabled />
-            <input type="hidden" id="bairroHidden" name="endereco.bairro" />
+            <input type="text" id="bairro" placeholder="Bairro" required disabled/>
+            <input type="hidden" id="bairroHidden" name="endereco.bairro"/>
 
             <label for="logradouro">Logradouro</label>
-            <input type="text" id="logradouro" placeholder="Logradouro" required disabled />
-            <input type="hidden" id="logradouroHidden" name="endereco.logradouro" />
-
-            <label for="regiao">Região</label>
-            <input type="text" id="regiao" placeholder="Região" required disabled />
-            <input type="hidden" id="regiaoHidden" name="endereco.regiao" />
+            <input type="text" id="logradouro" placeholder="Logradouro" required disabled/>
+            <input type="hidden" id="logradouroHidden" name="endereco.logradouro"/>
 
             <label for="numero">Número</label>
-            <input type="text" id="numero" name="endereco.numero" placeholder="Número" required />
+            <input type="text" id="numero" name="endereco.numero" placeholder="Número" required/>
             <div class="error" id="numeroError"></div>
 
             <label for="complemento">Complemento</label>
-            <input type="text" id="complemento" name="endereco.complemento" placeholder="Complemento" />
+            <input type="text" id="complemento" name="endereco.complemento" placeholder="Complemento"/>
+
+
         </fieldset>
 
         <button type="submit" class="next-button">Finalizar Cadastro</button>
     </form>
 </div>
 
-<script>
-    // Exemplo de validação em tempo real para a senha
 
+<script>
+    // Desabilita campos de endereço ao carregar
+    document.addEventListener('DOMContentLoaded', function () {
+        disableAddressFields(true);
+    });
+
+    // Validação da senha
     const senhaInput = document.getElementById('senha');
     const confirmSenhaInput = document.getElementById('confirmSenha');
 
@@ -128,22 +155,12 @@
 
     function validatePassword() {
         const senha = senhaInput.value;
-
-        // Critérios de validação
-        const minLength = senha.length >= 8;
-        const hasUppercase = /[A-Z]/.test(senha);
-        const hasLowercase = /[a-z]/.test(senha);
-        const hasNumber = /[0-9]/.test(senha);
-        const hasSpecialChar = /[@#$%^&+=!]/.test(senha);
-        const noSpaces = !/\s/.test(senha);
-
-        // Atualiza a lista de critérios
-        updateCriteria(minLengthEl, minLength);
-        updateCriteria(uppercaseEl, hasUppercase);
-        updateCriteria(lowercaseEl, hasLowercase);
-        updateCriteria(numberEl, hasNumber);
-        updateCriteria(specialCharEl, hasSpecialChar);
-        updateCriteria(noSpacesEl, noSpaces);
+        updateCriteria(minLengthEl, senha.length >= 8);
+        updateCriteria(uppercaseEl, /[A-Z]/.test(senha));
+        updateCriteria(lowercaseEl, /[a-z]/.test(senha));
+        updateCriteria(numberEl, /[0-9]/.test(senha));
+        updateCriteria(specialCharEl, /[@#$%^&+=!]/.test(senha));
+        updateCriteria(noSpacesEl, !/\s/.test(senha));
     }
 
     function updateCriteria(element, valid) {
@@ -156,127 +173,157 @@
         }
     }
 
-    // Valida se a senha e o confirmar senha são iguais
     function validateConfirmPassword() {
-        if (senhaInput.value !== confirmSenhaInput.value) {
-            confirmSenhaError.textContent = "As senhas não coincidem.";
-        } else {
-            confirmSenhaError.textContent = "";
-        }
+        confirmSenhaError.textContent = (senhaInput.value !== confirmSenhaInput.value)
+            ? "As senhas não coincidem."
+            : "";
     }
 
     senhaInput.addEventListener('input', () => {
         validatePassword();
         validateConfirmPassword();
     });
-
     confirmSenhaInput.addEventListener('input', validateConfirmPassword);
+    // Sempre que o usuário digitar no bairro visível, atualizar o hidden
+    document.getElementById("bairro").addEventListener("input", function (e) {
+        document.getElementById("bairroHidden").value = e.target.value;
+    });
 
-    // Já existentes: formata CEP, CPF e Telefone (seus scripts anteriores permanecem)
-    document.getElementById("cep").addEventListener("input", function(e) {
+    // Mesma lógica para logradouro
+    document.getElementById("logradouro").addEventListener("input", function (e) {
+        document.getElementById("logradouroHidden").value = e.target.value;
+    });
+    // Valida CEP e preenche campos de endereço
+    document.getElementById("cep").addEventListener("input", function (e) {
         let cepNumeros = e.target.value.replace(/\D/g, "");
         if (cepNumeros.length > 5) {
             e.target.value = cepNumeros.slice(0, 5) + "-" + cepNumeros.slice(5, 8);
         } else {
             e.target.value = cepNumeros;
         }
+
+        // Se estiver completo (xxxxx-xxx)
         if (e.target.value.length === 9) {
             disableAddressFields(true);
+
             fetch("/api/cep?cep=" + e.target.value.replace("-", ""))
-                .then(function(response) {
-                    if (!response.ok) {
-                        throw new Error("CEP não encontrado.");
-                    }
+                .then(function (response) {
+                    if (!response.ok) throw new Error("CEP não encontrado.");
                     return response.json();
                 })
-                .then(function(data) {
-                    const estado    = data.estado    || "";
-                    const cidade    = data.localidade || "";
-                    const bairro    = data.bairro    || "";
+                .then(function (data) {
+                    const estado = data.estado || "";
+                    const cidade = data.localidade || "";
+                    const bairro = data.bairro || "";
                     const logradouro = data.logradouro || "";
-                    const regiao    = data.regiao    || "";
+                    const regiao = data.regiao || "";
 
-                    document.getElementById("estado").value       = estado;
-                    document.getElementById("cidade").value       = cidade;
-                    document.getElementById("bairro").value       = bairro;
-                    document.getElementById("logradouro").value   = logradouro;
-                    document.getElementById("regiao").value         = regiao;
-                    document.getElementById("estadoHidden").value   = estado;
-                    document.getElementById("cidadeHidden").value   = cidade;
-                    document.getElementById("bairroHidden").value   = bairro;
+                    document.getElementById("estadoHidden").value = estado;
+                    document.getElementById("cidadeHidden").value = cidade;
+                    document.getElementById("bairroHidden").value = bairro;
                     document.getElementById("logradouroHidden").value = logradouro;
-                    document.getElementById("regiaoHidden").value     = regiao;
+                    document.getElementById("regiaoHidden").value = regiao;
+
+                    disableAddressFields(false);
+
+                    document.getElementById("estado").value = estado;
+                    document.getElementById("estado").disabled = true;
+
+                    document.getElementById("cidade").value = cidade;
+                    document.getElementById("cidade").disabled = true;
+
+                    document.getElementById("regiao").value = regiao;
+                    document.getElementById("regiao").disabled = true;
+
+                    const bairroEl = document.getElementById("bairro");
+                    bairroEl.value = bairro;
+                    bairroEl.disabled = !!bairro;
+
+                    const logradouroEl = document.getElementById("logradouro");
+                    logradouroEl.value = logradouro;
+                    logradouroEl.disabled = !!logradouro;
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     alert(error.message);
-                    document.getElementById("estado").value       = "";
-                    document.getElementById("cidade").value       = "";
-                    document.getElementById("bairro").value       = "";
-                    document.getElementById("logradouro").value   = "";
-                    document.getElementById("regiao").value         = "";
-                    document.getElementById("estadoHidden").value   = "";
-                    document.getElementById("cidadeHidden").value   = "";
-                    document.getElementById("bairroHidden").value   = "";
-                    document.getElementById("logradouroHidden").value = "";
-                    document.getElementById("regiaoHidden").value     = "";
+                    clearAddressFields();
+                    disableAddressFields(true);
                 });
+        } else {
+            // Se apagar o CEP (menos de 9 chars), limpa e desabilita
+            clearAddressFields();
+            disableAddressFields(true);
         }
     });
 
-    // Função para desabilitar os campos visuais do endereço
+    function clearAddressFields() {
+        document.getElementById("estado").value = "";
+        document.getElementById("cidade").value = "";
+        document.getElementById("bairro").value = "";
+        document.getElementById("logradouro").value = "";
+        document.getElementById("regiao").value = "";
+        document.getElementById("estadoHidden").value = "";
+        document.getElementById("cidadeHidden").value = "";
+        document.getElementById("bairroHidden").value = "";
+        document.getElementById("logradouroHidden").value = "";
+        document.getElementById("regiaoHidden").value = "";
+    }
+
+    // Desabilita/habilita campos de endereço
     function disableAddressFields(disable) {
+        document.getElementById("regiao").disabled = disable;
         document.getElementById("estado").disabled = disable;
         document.getElementById("cidade").disabled = disable;
         document.getElementById("bairro").disabled = disable;
         document.getElementById("logradouro").disabled = disable;
-        document.getElementById("regiao").disabled = disable;
     }
 
-    // Formatação em tempo real para CPF e Telefone (conforme seu código existente)
-    document.getElementById("cpf").addEventListener("input", function(e) {
+    // Formatação CPF
+    document.getElementById("cpf").addEventListener("input", function (e) {
         let digits = e.target.value.replace(/\D/g, "");
         let formatted = "";
         if (digits.length > 0) {
             if (digits.length <= 3) {
                 formatted = digits;
             } else if (digits.length <= 6) {
-                formatted = digits.slice(0,3) + "." + digits.slice(3);
+                formatted = digits.slice(0, 3) + "." + digits.slice(3);
             } else if (digits.length <= 9) {
-                formatted = digits.slice(0,3) + "." + digits.slice(3,6) + "." + digits.slice(6);
+                formatted = digits.slice(0, 3) + "." + digits.slice(3, 6) + "." + digits.slice(6);
             } else {
-                formatted = digits.slice(0,3) + "." + digits.slice(3,6) + "." + digits.slice(6,9) + "-" + digits.slice(9,11);
+                formatted = digits.slice(0, 3) + "." + digits.slice(3, 6) + "." + digits.slice(6, 9)
+                    + "-" + digits.slice(9, 11);
             }
         }
         e.target.value = formatted;
     });
 
-    document.getElementById("telefone").addEventListener("input", function(e) {
+    // Formatação Telefone
+    document.getElementById("telefone").addEventListener("input", function (e) {
         let digits = e.target.value.replace(/\D/g, "");
         let formatted = "";
         if (digits.length > 0) {
             if (digits.length <= 2) {
                 formatted = "(" + digits;
             } else {
-                formatted = "(" + digits.slice(0,2) + ") ";
+                formatted = "(" + digits.slice(0, 2) + ") ";
                 if (digits.length <= 7) {
                     formatted += digits.slice(2);
                 } else {
-                    formatted += digits.slice(2,7) + "-" + digits.slice(7,11);
+                    formatted += digits.slice(2, 7) + "-" + digits.slice(7, 11);
                 }
             }
         }
         e.target.value = formatted;
     });
 
-    document.getElementById("combinedForm").addEventListener("submit", function(e) {
-        // Remover formatações de CPF e Telefone antes do submit
+    // Remove pontos e traços antes do submit
+    document.getElementById("combinedForm").addEventListener("submit", function (e) {
         let cpfField = document.getElementById("cpf");
         cpfField.value = cpfField.value.replace(/\D/g, "");
 
         let telField = document.getElementById("telefone");
         let telDigits = telField.value.replace(/\D/g, "");
         if (telDigits.length >= 11) {
-            telField.value = telDigits.slice(0,7) + "-" + telDigits.slice(7,11);
+            telField.value = telDigits.slice(0, 7) + "-" + telDigits.slice(7, 11);
         } else {
             telField.value = telDigits;
         }

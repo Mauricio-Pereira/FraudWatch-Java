@@ -14,13 +14,13 @@ dados no banco, além de disponibilizar informações para aplicações web e mo
 **Link do PITCH:** [FraudWatch](https://www.youtube.com/watch?v=jExbQ6DjZaw)
 ## Integrantes
 
-- [Maurício Vieira Pereira](https://github.com/Mauricio-Pereira/)
+- [Maurício Vieira Pereira - RM553748 - 2TDSPC](https://github.com/Mauricio-Pereira/)
     - Responsável pelo back-end em Java, incluindo a modelagem do banco de dados, integração com APIs externas, e
       gerenciamento do fluxo de dados no sistema.
-- [Luis Otávio Leitão - RM 553542 ](https://github.com/Luiz1614)
+- [Luis Otávio Leitão - RM 553542 - 2TDSPC](https://github.com/Luiz1614)
     - Desenvolvedor da aplicação web em .NET, focado na criação da arquitetura DevOps, automação de pipelines, e
       implementação de containers Docker.
-- [Yago Lucas Gonçalves - RM 553013](https://github.com/yagoluucas/)
+- [Vitor de Melo Marques - RM 553483 – 2TDPSR](https://github.com/yagoluucas/)
     - Desenvolvedor da aplicação mobile em Kotlin, além de ser o responsável pela criação de um modelo de Machine
       Learning para detecção de fraudes. Atua também na documentação e qualidade de software (QA).
 
@@ -57,22 +57,22 @@ dados no banco, além de disponibilizar informações para aplicações web e mo
 
 | **Atividade**                                                           | **Responsável**      | **Prazo de Entrega** |
 |-------------------------------------------------------------------------|----------------------|----------------------|
-| Criação de wireframes para a aplicação mobile (mínimo de 5 telas)       | Yago Lucas Gonçalves | 01/10                |
-| Implementação da tela inicial da aplicação mobile em Kotlin             | Yago Lucas Gonçalves | 01/10                |
-| Implementação do fluxo de navegação entre as telas no aplicativo mobile | Yago Lucas Gonçalves | 01/10                |
+| Criação de wireframes para a aplicação mobile (mínimo de 5 telas)       | Vitor de Melo Marques | 01/10                |
+| Implementação da tela inicial da aplicação mobile em Kotlin             | Vitor de Melo Marques | 01/10                |
+| Implementação do fluxo de navegação entre as telas no aplicativo mobile | Vitor de Melo Marques | 01/10                |
 
 #### Machine Learning e QA
 
 | **Atividade**                                                          | **Responsável**      | **Prazo de Entrega** |
 |------------------------------------------------------------------------|----------------------|----------------------|
-| Desenvolvimento do modelo de Machine Learning para detecção de fraudes | Yago Lucas Gonçalves | 01/10                |
-| Documentação de QA e documentação dos casos de uso para o modelo de IA | Yago Lucas Gonçalves | 01/10                |
+| Desenvolvimento do modelo de Machine Learning para detecção de fraudes | Vitor de Melo Marques | 01/10                |
+| Documentação de QA e documentação dos casos de uso para o modelo de IA | Vitor de Melo Marques | 01/10                |
 
 #### Revisão e Finalização de Documentação
 
 | **Atividade**                         | **Responsável**                   | **Prazo de Entrega** |
 |---------------------------------------|-----------------------------------|----------------------|
-| Revisão e finalização da documentação | Maurício Vieira Pereira, Luis Otávio Leitão, Yago Lucas Gonçalves | 07/10 |
+| Revisão e finalização da documentação | Maurício Vieira Pereira, Luis Otávio Leitão, Vitor de Melo Marques | 07/10 |
 ---
 
 ### Atividades da Sprint 2
@@ -82,13 +82,13 @@ dados no banco, além de disponibilizar informações para aplicações web e mo
 
 | **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
 |-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
-| Desenho da Arquitetura da Solução aplicando TOGAF usando Archi                                           | Maurício Vieira Pereira, Luis Otávio Leitão, Yago Lucas Gonçalves | 15/10                |
+| Desenho da Arquitetura da Solução aplicando TOGAF usando Archi                                           | Maurício Vieira Pereira, Luis Otávio Leitão, Vitor de Melo Marques | 15/10                |
 | Desenvolvimento de funções de validação de entrada de dados                                               | Maurício Vieira Pereira                       | 20/10                |
 | Criação de procedures para operações CRUD com validação e tratamento de erros                             | Maurício Vieira Pereira                       | 25/10                |
 | Execução das procedures via aplicação Java e gravação do vídeo demonstrativo                              | Maurício Vieira Pereira                       | 30/10                |
 | Criação de funções com cursor e joins para relatório formatado                                             | Maurício Vieira Pereira                       | 05/11                |
 | Desenvolvimento de funções para relatório com regra de negócio específica                                 | Maurício Vieira Pereira                       | 07/11                |
-| Revisão e finalização da documentação de QA e Compliance                                                 | Yago Lucas Gonçalves                          | 08/11                |
+| Revisão e finalização da documentação de QA e Compliance                                                 | Vitor de Melo Marques                          | 08/11                |
 
 #### Mastering Relational and Non-Relational Database
 
@@ -133,14 +133,14 @@ dados no banco, além de disponibilizar informações para aplicações web e mo
 
 | **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
 |-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
-| Desenvolvimento da versão Beta do projeto com funcionalidades principais                                 | Yago Lucas Gonçalves                          | 20/10                |
-| Apresentação das diferenças entre a etapa atual e a proposta inicial                                     | Yago Lucas Gonçalves                          | 22/10                |
-| Detalhamento dos frameworks/bibliotecas Python, APIs e ferramentas a serem utilizadas                    | Yago Lucas Gonçalves                          | 25/10                |
-| Explicação do funcionamento dos recursos/ferramentas dentro da aplicação                                  | Yago Lucas Gonçalves                          | 28/10                |
-| Descrição da aplicação de conceitos de Machine Learning / IA no projeto                                   | Yago Lucas Gonçalves                          | 30/10                |
-| Organização e atualização da documentação no repositório GitHub                                           | Yago Lucas Gonçalves                          | 02/11                |
-| Gravação e upload do vídeo demonstrativo das funcionalidades do projeto                                   | Yago Lucas Gonçalves                          | 05/11                |
-| Preparação do arquivo ZIP com link do repositório, vídeo e documentação organizada                        | Yago Lucas Gonçalves                          | 08/11                |
+| Desenvolvimento da versão Beta do projeto com funcionalidades principais                                 | Vitor de Melo Marques                          | 20/10                |
+| Apresentação das diferenças entre a etapa atual e a proposta inicial                                     | Vitor de Melo Marques                          | 22/10                |
+| Detalhamento dos frameworks/bibliotecas Python, APIs e ferramentas a serem utilizadas                    | Vitor de Melo Marques                          | 25/10                |
+| Explicação do funcionamento dos recursos/ferramentas dentro da aplicação                                  | Vitor de Melo Marques                          | 28/10                |
+| Descrição da aplicação de conceitos de Machine Learning / IA no projeto                                   | Vitor de Melo Marques                          | 30/10                |
+| Organização e atualização da documentação no repositório GitHub                                           | Vitor de Melo Marques                          | 02/11                |
+| Gravação e upload do vídeo demonstrativo das funcionalidades do projeto                                   | Vitor de Melo Marques                          | 05/11                |
+| Preparação do arquivo ZIP com link do repositório, vídeo e documentação organizada                        | Vitor de Melo Marques                          | 08/11                |
 
 #### Java Advanced
 
@@ -161,15 +161,15 @@ dados no banco, além de disponibilizar informações para aplicações web e mo
 
 | **Atividade**                                                                                               | **Responsável**                               | **Prazo de Entrega** |
 |-------------------------------------------------------------------------------------------------------------|-----------------------------------------------|----------------------|
-| Criação do diagrama de integração/comunicação do aplicativo com APIs/banco de dados e sistemas externos   | Yago Lucas Gonçalves                          | 15/10                |
-| Desenvolvimento visual de 5 telas funcionais do aplicativo mobile                                         | Yago Lucas Gonçalves                          | 25/10                |
-| Implementação das chamadas à API em pelo menos 3 telas do aplicativo                                       | Yago Lucas Gonçalves                          | 30/10                |
-| Aplicação de layout adequado e garantia de bom nível de usabilidade                                       | Yago Lucas Gonçalves                          | 05/11                |
-| Testes das funcionalidades implementadas no aplicativo mobile                                             | Yago Lucas Gonçalves                          | 07/11                |
-| Preparação do documento do Word com imagens, explicações, nomes completos e RMs dos integrantes          | Yago Lucas Gonçalves                          | 08/11                |
-| Atualização do repositório GitHub com o código do aplicativo e documentação                                | Yago Lucas Gonçalves                          | 08/11                |
-| Gravação e upload do vídeo demonstrativo do funcionamento do aplicativo                                   | Yago Lucas Gonçalves                          | 08/11                |
-| Geração e disponibilização do APK para instalação                                                        | Yago Lucas Gonçalves                          | 08/11                |
+| Criação do diagrama de integração/comunicação do aplicativo com APIs/banco de dados e sistemas externos   | Vitor de Melo Marques                          | 15/10                |
+| Desenvolvimento visual de 5 telas funcionais do aplicativo mobile                                         | Vitor de Melo Marques                          | 25/10                |
+| Implementação das chamadas à API em pelo menos 3 telas do aplicativo                                       | Vitor de Melo Marques                          | 30/10                |
+| Aplicação de layout adequado e garantia de bom nível de usabilidade                                       | Vitor de Melo Marques                          | 05/11                |
+| Testes das funcionalidades implementadas no aplicativo mobile                                             | Vitor de Melo Marques                          | 07/11                |
+| Preparação do documento do Word com imagens, explicações, nomes completos e RMs dos integrantes          | Vitor de Melo Marques                          | 08/11                |
+| Atualização do repositório GitHub com o código do aplicativo e documentação                                | Vitor de Melo Marques                          | 08/11                |
+| Gravação e upload do vídeo demonstrativo do funcionamento do aplicativo                                   | Vitor de Melo Marques                          | 08/11                |
+| Geração e disponibilização do APK para instalação                                                        | Vitor de Melo Marques                          | 08/11                |
 
 
 ---

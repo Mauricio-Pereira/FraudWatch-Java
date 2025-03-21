@@ -28,14 +28,15 @@ public class LoginController {
                         @RequestParam("senha") String senha,
                         RedirectAttributes redirectAttributes) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(email);
+        System.out.println(usuarioOptional);
         if (!usuarioOptional.isPresent() || !usuarioOptional.get().getSenha().equals(senha)) {
             redirectAttributes.addFlashAttribute("error", "Usuário ou senha inválidos.");
             return "redirect:/";
         }
         Usuario usuario = usuarioOptional.get();
 // Verifica se o usuário é admin
-        if (usuario.getEmail().equals("admin@admin.com") && usuario.getSenha().equals("@dmin1234")) {
-            return "redirect:/home";
+        if (usuario.getEmail().equals("admin@admin.com") && usuario.getSenha().equals("@Dmin1234")) {
+            return "redirect:/users";
         } else {
             redirectAttributes.addFlashAttribute("error", "Usuário não tem permissão para acessar o sistema.");
             return "redirect:/";

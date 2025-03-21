@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,7 @@ public class HomeController {
     public String listUsers(
             @RequestParam(value = "page", defaultValue = "0") int page,
             Model model) {
-        Pageable pageable = PageRequest.of(page, 20);
+        Pageable pageable = PageRequest.of(page, 20, Sort.by("id").ascending());
         // Excluindo o admin
         Page<Usuario> usuariosPage = usuarioRepository.findByEmailNot("admin@admin.com", pageable);
         model.addAttribute("usuariosPage", usuariosPage);
