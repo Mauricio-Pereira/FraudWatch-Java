@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title>Usuários Cadastrados</title>
-    <link rel="stylesheet" th:href="@{/css/userList.css}" />
+    <title th:text="#{label.users.title}">Usuários Cadastrados</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 
 <div class="container">
-    <h2>Usuários Cadastrados</h2>
+    <h2 th:text="#{label.users.title}">Usuários Cadastrados</h2>
     <table>
         <thead>
         <tr>
             <th>ID</th>
-            <th>Nome</th>
-            <th>Sobrenome</th>
+            <th th:text="#{label.name}">Nome</th>
+            <th th:text="#{label.lastname}">Sobrenome</th>
             <th>Email</th>
-            <th>Ações</th>
+            <th th:text="#{label.actions}">Ações</th>
         </tr>
         </thead>
         <tbody>
@@ -27,110 +27,98 @@
             <td th:text="${usuario.sobrenome}"></td>
             <td th:text="${usuario.email}"></td>
             <td>
-                <!-- Botão de editar com data-id -->
                 <button class="edit-button"
                         th:attr="data-id=${usuario.id}"
-                        onclick="openEditModal(this.getAttribute('data-id'))">
-                    Editar
-                </button>
+                        onclick="openEditModal(this.getAttribute('data-id'))"
+                        th:text="#{label.edit}">Editar</button>
 
-                <!-- Botão de deletar -->
                 <button class="delete-button"
                         th:attr="data-id=${usuario.id}"
-                        onclick="deleteUsuario(this)">
-                    Deletar
-                </button>
+                        onclick="deleteUsuario(this)"
+                        th:text="#{label.delete}">Deletar</button>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <!-- Botão para atualizar a lista -->
     <div class="button-container">
-        <a th:href="@{'/users?page=' + ${usuariosPage.number}}" class="update-button">Atualizar Lista</a>
+        <a th:href="@{'/users?page=' + ${usuariosPage.number}}" class="update-button" th:text="#{label.refresh.list}">Atualizar Lista</a>
     </div>
 
-    <!-- Paginação -->
     <div class="pagination">
-        <a th:if="${usuariosPage.hasPrevious()}" th:href="@{/users(page=${usuariosPage.number - 1})}">Anterior</a>
-        <span th:text="'Página ' + (${usuariosPage.number} + 1) + ' de ' + ${usuariosPage.totalPages}"></span>
-        <a th:if="${usuariosPage.hasNext()}" th:href="@{/users(page=${usuariosPage.number + 1})}">Próxima</a>
+        <a th:if="${usuariosPage.hasPrevious()}" th:href="@{/users(page=${usuariosPage.number - 1})}" th:text="#{label.previous}">Anterior</a>
+        <span th:text="#{label.page} + ' ' + (${usuariosPage.number} + 1) + ' ' + #{label.of} + ' ' + ${usuariosPage.totalPages}"></span>
+        <a th:if="${usuariosPage.hasNext()}" th:href="@{/users(page=${usuariosPage.number + 1})}" th:text="#{label.next}">Próxima</a>
     </div>
 </div>
 
-<!-- MODAL: escondido inicialmente -->
 <div id="editModal" class="modal">
     <div class="modal-content">
-        <h3>Editar Usuário</h3>
-        <form id="editForm">
+        <h3 th:text="#{label.edit.user}">Editar Usuário</h3>
+        <form id="editForm" class="edit-form-columns">
+            <div class="user-column">
+                <h4>Dados do Usuário</h4>
+                <label for="editNome">Nome:</label>
+                <input type="text" id="editNome" />
 
-            <!-- ID oculto -->
-            <input type="hidden" id="editUserId" />
+                <label for="editSobrenome">Sobrenome:</label>
+                <input type="text" id="editSobrenome" />
 
-            <!-- Dados pessoais -->
-            <label for="editNome">Nome:</label>
-            <input type="text" id="editNome" />
+                <label for="editEmail">Email:</label>
+                <input type="text" id="editEmail" />
 
-            <label for="editSobrenome">Sobrenome:</label>
-            <input type="text" id="editSobrenome" />
+                <label for="editSenha">Senha:</label>
+                <input type="password" id="editSenha" />
 
-            <label for="editEmail">Email:</label>
-            <input type="text" id="editEmail" />
+                <label for="editCpf">CPF:</label>
+                <input type="text" id="editCpf" />
 
-            <label for="editSenha">Senha:</label>
-            <input type="password" id="editSenha" />
+                <label for="editDataNascimento">Data de Nascimento:</label>
+                <input type="date" id="editDataNascimento" />
 
-            <label for="editCpf">CPF:</label>
-            <input type="text" id="editCpf" />
+                <label for="editTelefone">Telefone:</label>
+                <input type="text" id="editTelefone" />
+            </div>
 
-            <label for="editDataNascimento">Data Nasc.:</label>
-            <input type="date" id="editDataNascimento" />
+            <div class="address-column">
+                <h4>Endereço</h4>
+                <label for="editCep">CEP:</label>
+                <input type="text" id="editCep" />
 
-            <label for="editTelefone">Telefone:</label>
-            <input type="text" id="editTelefone" />
+                <label for="editLogradouro">Logradouro:</label>
+                <input type="text" id="editLogradouro" />
 
-            <!-- Título para seção de endereço -->
-            <!-- Ocupa as duas colunas no grid -->
-            <h4 style="grid-column: 1 / span 2; margin-top: 20px;">
-                Endereço
-            </h4>
+                <label for="editBairro">Bairro:</label>
+                <input type="text" id="editBairro" />
 
-            <!-- Campos de endereço -->
-            <label for="editCep">CEP:</label>
-            <input type="text" id="editCep" />
+                <label for="editCidade">Cidade:</label>
+                <input type="text" id="editCidade" />
 
-            <label for="editLogradouro">Logradouro:</label>
-            <input type="text" id="editLogradouro" />
+                <label for="editEstado">Estado:</label>
+                <input type="text" id="editEstado" />
 
-            <label for="editBairro">Bairro:</label>
-            <input type="text" id="editBairro" />
+                <label for="editRegiao">Região:</label>
+                <input type="text" id="editRegiao" />
 
-            <label for="editCidade">Cidade:</label>
-            <input type="text" id="editCidade" />
+                <label for="editNumero">Número:</label>
+                <input type="text" id="editNumero" />
 
-            <label for="editEstado">Estado:</label>
-            <input type="text" id="editEstado" />
+                <label for="editComplemento">Complemento:</label>
+                <input type="text" id="editComplemento" />
+            </div>
 
-            <label for="editRegiao">Região:</label>
-            <input type="text" id="editRegiao" />
-
-            <label for="editNumero">Número:</label>
-            <input type="text" id="editNumero" />
-
-            <label for="editComplemento">Complemento:</label>
-            <input type="text" id="editComplemento" />
-
-            <!-- Botões alinhados à direita, ocupando 2 colunas do grid -->
             <div class="btn-group">
                 <button type="button" onclick="saveEdit()">Salvar</button>
                 <button type="button" onclick="closeEditModal()">Cancelar</button>
             </div>
-            <input type="hidden" id="editTipoUsuarioId" />
 
+            <input type="hidden" id="editUserId" />
+            <input type="hidden" id="editTipoUsuarioId" />
         </form>
+
     </div>
 </div>
-
+<div th:replace="~{fragments/footer :: footer}"></div>
 <script>
     // Chama o endpoint GET /usuario/{id} para buscar todos os dad  os
     function openEditModal(userId) {

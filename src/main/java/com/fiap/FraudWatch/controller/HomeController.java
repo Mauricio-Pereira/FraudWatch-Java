@@ -2,6 +2,7 @@ package com.fiap.FraudWatch.controller;
 
 import com.fiap.FraudWatch.model.Usuario;
 import com.fiap.FraudWatch.repository.UsuarioRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,8 +22,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -36,6 +41,7 @@ public class HomeController {
         return "home"; // Procura um template home.html
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
     public String listUsers(
             @RequestParam(value = "page", defaultValue = "0") int page,
@@ -70,8 +76,4 @@ public class HomeController {
                     .body("Erro inesperado ao deletar usuário.");
         }
     }
-
-
-
-
 }

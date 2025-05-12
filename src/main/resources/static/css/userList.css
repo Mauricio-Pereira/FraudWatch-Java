@@ -82,69 +82,6 @@ th {
     color: #0B1E51;
 }
 
-
-/* HEADER */
-/* Estilo do header */
-.header {
-    background-color: #0B1E51; /* Cor primary */
-    color: white;
-    display: flex;
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: space-between;
-    padding: 16px 20px;
-    min-height: 100px;
-    width: 100%;
-}
-
-
-.header-left {
-    display: flex;
-    align-items: center;
-}
-
-.header-brand {
-    display: flex;
-    align-items: center;
-    /*tirar o sublinhado do link*/
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-.header-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-right: 10px;
-    color: white;
-}
-/*a hover para title*/
-.header-title:hover {
-    color: white;
-}
-.logo-min {
-    max-height: 50px !important;
-    max-width: 50px !important;
-    object-fit: contain;
-}
-
-.header-right a {
-    background-color: #FFF;
-    color: #0B1E51;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 16px;
-    border-radius: 8px;
-    text-decoration: none;
-    min-height: 40px;
-    min-width: 80px;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-.header-right a:hover {
-    background-color: #e0e0e0;
-}
-
-
 /* MODAL */
 .modal {
     display: none; /* começa oculto */

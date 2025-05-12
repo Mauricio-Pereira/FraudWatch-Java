@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -7,18 +9,44 @@
 <body>
 <!-- Fragmento de Header -->
 <div th:fragment="header">
-
     <div class="header">
         <div class="header-left">
-            <a th:href="@{/}" style="text-decoration: none;">
+            <a th:href="@{/home}" style="text-decoration: none;">
                 <div class="header-brand">
-                    <span class="header-title">FraudWatch</span>
+                    <span class="header-title" th:text="#{label.header.title}">FraudWatch</span>
                     <img src="/images/fraudwatch-logo.png" alt="FraudWatch Logo" class="logo-min"/>
                 </div>
             </a>
+            <a th:href="@{/users}"
+               sec:authorize="hasRole('ADMIN')"
+               class="header-button-white"
+               style="margin-left: 20px;"
+               th:text="#{label.header.users}">Usuários Cadastrados</a>
+        </div>
+
+        <div class="header-right">
+            <!-- Botões de idioma -->
+            <button class="header-button" onclick="changeLang('pt')">PT</button>
+            <button class="header-button" onclick="changeLang('en')">EN</button>
+
+            <!-- Se logado: mostrar botão de logout -->
+            <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()" style="display: inline;">
+                <button type="submit" class="header-button" th:text="#{label.logout}">Sair</button>
+            </form>
+
+            <a th:href="@{/}" sec:authorize="isAnonymous()" class="header-button" th:text="#{label.login}">Entrar</a>
         </div>
     </div>
+
+    <script>
+        function changeLang(lang) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('lang', lang);
+            window.location.href = url.toString();
+        }
+    </script>
 </div>
+
 
 </body>
 </html>

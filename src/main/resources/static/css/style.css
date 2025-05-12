@@ -9,9 +9,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #D6E8FF; /* secondary */
     color: #333333; /* text */
+    line-height: 1.6;
 }
 
-/* Container */
+/* ==================== LOGIN ==================== */
 .login-container {
     width: 90%;
     max-width: 400px;
@@ -23,7 +24,6 @@ body {
     text-align: center;
 }
 
-/* Logo */
 .logo-container {
     margin-bottom: 20px;
 }
@@ -33,7 +33,6 @@ body {
     height: auto;
 }
 
-/* Labels */
 .label {
     display: block;
     font-size: 14px;
@@ -42,7 +41,6 @@ body {
     text-align: left;
 }
 
-/* Inputs */
 .input {
     width: 100%;
     padding: 10px;
@@ -57,7 +55,6 @@ body {
     color: #999999;
 }
 
-/* Botão de Login */
 .login-button {
     width: 100%;
     padding: 14px;
@@ -75,7 +72,6 @@ body {
     background-color: #093a80;
 }
 
-/* Botão de Criar Conta */
 .create-account-button {
     display: inline-block;
     padding: 14px 24px;
@@ -92,19 +88,89 @@ body {
 }
 
 
-/* HEADER */
-/* Estilo do header */
+/* ==================== FORMULÁRIOS ==================== */
+.form-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 40px auto;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0B1E51;
+}
+
+fieldset {
+    border: 1px solid #0B1E51;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+legend {
+    padding: 0 5px;
+    font-weight: bold;
+    color: #0B1E51;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #0B1E51;
+    border-radius: 4px;
+}
+
+.next-button, .create-button {
+    width: 100%;
+    padding: 14px;
+    background-color: #0B1E51;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.next-button:hover, .create-button:hover {
+    background-color: #093a80;
+}
+
+.password-requirements {
+    list-style: none;
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.password-requirements li {
+    font-size: 14px;
+    color: #555;
+}
+
+
+/* ==================== HEADER ==================== */
 .header {
     background-color: #0B1E51; /* Cor primary */
     color: white;
     display: flex;
-    align-items: center; /* Centraliza verticalmente */
+    align-items: center;
     justify-content: space-between;
     padding: 16px 20px;
     min-height: 100px;
     width: 100%;
 }
-
 
 .header-left {
     display: flex;
@@ -114,7 +180,6 @@ body {
 .header-brand {
     display: flex;
     align-items: center;
-    /*tirar o sublinhado do link*/
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -125,17 +190,25 @@ body {
     margin-right: 10px;
     color: white;
 }
-/*a hover para title*/
+
 .header-title:hover {
     color: white;
 }
+
 .logo-min {
     max-height: 50px !important;
     max-width: 50px !important;
     object-fit: contain;
 }
 
-.header-right a {
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-right a,
+.header-right button {
     background-color: #FFF;
     color: #0B1E51;
     font-size: 16px;
@@ -147,10 +220,507 @@ body {
     min-width: 80px;
     text-align: center;
     transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
-.header-right a:hover {
+.header-right a:hover,
+.header-right button:hover {
     background-color: #e0e0e0;
 }
 
+.header-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
 
+.header-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.header-button-white {
+    background-color: #FFF;
+    color: #0B1E51;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    min-height: 40px;
+    min-width: 80px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.header-button-white:hover {
+    background-color: #e0e0e0;
+}
+
+/* ==================== TABELA DE USUÁRIOS ==================== */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #0B1E51;
+    color: #fff;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-button, .delete-button, .update-button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+.edit-button {
+    background-color: #0B1E51;
+    color: #fff;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: #fff;
+}
+
+.edit-button:hover {
+    background-color: #093a80;
+}
+
+.delete-button:hover {
+    background-color: #e60000;
+}
+
+.update-button {
+    background-color: #ddd;
+    color: #333;
+}
+
+.update-button:hover {
+    background-color: #ccc;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #0B1E51;
+}
+
+
+/* ==================== MODAL ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 6% auto;
+    padding: 20px;
+    width: 700px;
+    max-width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #0B1E51;
+}
+
+.modal-content button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.modal-content button[onclick^="saveEdit"] {
+    background-color: #0B1E51;
+    color: #fff;
+}
+
+.modal-content button[onclick^="saveEdit"]:hover {
+    background-color: #093a80;
+}
+
+.modal-content button[onclick^="closeEditModal"] {
+    background-color: #ddd;
+    color: #333;
+}
+
+.modal-content button[onclick^="closeEditModal"]:hover {
+    background-color: #ccc;
+}
+
+#editForm label {
+    margin: 0;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+}
+
+#editForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+
+#editForm input[type="text"],
+#editForm input[type="date"],
+#editForm input[type="password"] {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal-content div[style*="margin-top"] {
+    margin-top: 1rem;
+    text-align: right;
+}
+
+.btn-group button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 8px;
+    font-size: 14px;
+}
+
+.edit-form-columns {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.form-column {
+    flex: 1;
+    min-width: 300px;
+}
+
+.form-column h4 {
+    margin-bottom: 15px;
+    color: #0B1E51;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 120px 1fr; /* label fixa, input flexível */
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-row label {
+    font-weight: bold;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.form-row input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-group {
+    width: 100%;
+    text-align: right;
+    margin-top: 1rem;
+}
+
+
+
+/* ==================== HOME ==================== */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+    background-color: #D6E8FF;
+}
+
+.content-container {
+    padding: 20px;
+    background-color: #D6E8FF;
+    flex-grow: 1;
+}
+
+.big-card {
+    background-color: #98C1FF;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.big-card-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.big-card-text {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #333333;
+}
+
+.big-card-button {
+    display: inline-block;
+    background-color: #0B1E51;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 24px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.big-card-button:hover {
+    background-color: #093a80;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 24px 0 16px;
+    text-align: center;
+    color: #333333;
+}
+
+.horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+}
+
+.card {
+    background-color: #98C1FF;
+    border-radius: 8px;
+    padding: 16px;
+    width: 120px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.card-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #333333;
+}
+
+.paragraph {
+    font-size: 14px;
+    margin-bottom: 16px;
+    color: #333333;
+    text-align: center;
+}
+
+.tip-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.tip-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.tip-text {
+    font-size: 14px;
+    color: #333333;
+    flex: 1;
+}
+
+.bottom-tab {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #98C1FF;
+    padding: 12px 0;
+    border-top: 1px solid #D6E8FF;
+}
+
+.tab-item {
+    text-align: center;
+}
+
+.tab-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    margin-bottom: 4px;
+}
+
+.tab-text {
+    font-size: 12px;
+    color: #333333;
+}
+
+/* ==================== CONFIRMAÇÃO FINAL ==================== */
+.confirmation-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.confirmation-container h2 {
+    text-align: center;
+    color: #0B1E51;
+    margin-bottom: 20px;
+}
+
+.data-container {
+    margin-bottom: 20px;
+}
+
+.data-item {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.data-item .label {
+    font-weight: bold;
+    width: 150px;
+    color: #333;
+}
+
+.data-item .value {
+    flex: 1;
+    color: #555;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.confirm-button, .edit-button {
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-button {
+    background-color: #0B1E51;
+    color: #fff;
+}
+
+.edit-button {
+    background-color: #ddd;
+    color: #333;
+    display: inline-block;
+}
+
+.confirm-button:hover {
+    background-color: #093a80;
+}
+
+.edit-button:hover {
+    background-color: #ccc;
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+    background-color: #0B1E51; /* Azul escuro - cor principal */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.container-footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container-footer p {
+    font-size: 14px;
+    color: #ffffff;
+    margin: 0;
+}

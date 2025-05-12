@@ -1,78 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title>FraudWatch - Confirme seus Dados</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/finalRegistration.css}" />
+    <title th:text="#{label.final.title}">FraudWatch - Confirme seus Dados</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
 <!-- Inclui o header -->
 <div th:replace="~{fragments/header :: header}"></div>
 
-<div class="container">
-    <h2>Confirme seus Dados</h2>
+<div class="confirmation-container">
+    <h2 th:text="#{label.final.title}">Confirme seus Dados</h2>
 
     <!-- Exibe os dados para confirmação -->
     <div class="data-container">
         <div class="data-item">
-            <span class="label">Nome:</span>
+            <span class="label" th:text="#{label.name}">Nome:</span>
             <span class="value" th:text="${usuarioRequest.nome}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Sobrenome:</span>
+            <span class="label" th:text="#{label.lastname}">Sobrenome:</span>
             <span class="value" th:text="${usuarioRequest.sobrenome}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Email:</span>
+            <span class="label" th:text="#{label.email}">Email:</span>
             <span class="value" th:text="${usuarioRequest.email}"></span>
         </div>
         <div class="data-item">
-            <span class="label">CPF:</span>
+            <span class="label" th:text="#{label.cpf}">CPF:</span>
             <span class="value" th:text="${usuarioRequest.cpf}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Data de Nascimento:</span>
+            <span class="label" th:text="#{label.birthdate}">Data de Nascimento:</span>
             <span class="value" th:text="${usuarioRequest.dataNascimento}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Telefone:</span>
+            <span class="label" th:text="#{label.phone}">Telefone:</span>
             <span class="value" th:text="${usuarioRequest.telefone}"></span>
         </div>
     </div>
 
     <!-- Dados do Endereço -->
-    <h3>Endereço</h3>
+    <h3 th:text="#{label.address}">Endereço</h3>
     <div class="data-container">
         <div class="data-item">
-            <span class="label">CEP:</span>
+            <span class="label" th:text="#{label.cep}">CEP:</span>
             <span class="value" th:text="${usuarioRequest.endereco.cep}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Logradouro:</span>
+            <span class="label" th:text="#{label.street}">Logradouro:</span>
             <span class="value" th:text="${usuarioRequest.endereco.logradouro}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Bairro:</span>
+            <span class="label" th:text="#{label.neighborhood}">Bairro:</span>
             <span class="value" th:text="${usuarioRequest.endereco.bairro}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Cidade:</span>
+            <span class="label" th:text="#{label.city}">Cidade:</span>
             <span class="value" th:text="${usuarioRequest.endereco.cidade}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Estado:</span>
+            <span class="label" th:text="#{label.state}">Estado:</span>
             <span class="value" th:text="${usuarioRequest.endereco.estado}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Região:</span>
+            <span class="label" th:text="#{label.region}">Região:</span>
             <span class="value" th:text="${usuarioRequest.endereco.regiao}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Número:</span>
+            <span class="label" th:text="#{label.number}">Número:</span>
             <span class="value" th:text="${usuarioRequest.endereco.numero}"></span>
         </div>
         <div class="data-item">
-            <span class="label">Complemento:</span>
+            <span class="label" th:text="#{label.complement}">Complemento:</span>
             <span class="value" th:text="${usuarioRequest.endereco.complemento}"></span>
         </div>
     </div>
@@ -100,10 +100,11 @@
             <input type="hidden" name="endereco.numero" th:value="${usuarioRequest.endereco.numero}" />
             <input type="hidden" name="endereco.complemento" th:value="${usuarioRequest.endereco.complemento}" />
 
-            <button type="submit" class="confirm-button">Confirmar</button>
+            <button type="submit" class="confirm-button" th:text="#{label.confirm}">Confirmar</button>
         </form>
-        <a th:href="@{/create-account}" class="edit-button">Editar</a>
+        <a th:href="@{/create-account}" class="edit-button" th:text="#{label.edit}">Editar</a>
     </div>
 </div>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

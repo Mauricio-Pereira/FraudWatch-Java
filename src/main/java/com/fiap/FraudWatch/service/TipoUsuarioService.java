@@ -34,5 +34,10 @@ public class TipoUsuarioService {
             analista.setDescricao("Analista");
             tipoUsuarioRepository.save(analista);
         }
+        if (tipoUsuarioRepository.findByDescricao("Administrador").isEmpty()) {
+            TipoUsuario administrador = new TipoUsuario();
+            administrador.setDescricao("Administrador");
+            tipoUsuarioRepository.save(administrador);
+        }
     }
 }

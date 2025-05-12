@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
     <meta charset="UTF-8">
-    <title>FraudWatch - Mensagem</title>
+    <title th:text="#{label.message.title}">FraudWatch - Mensagem</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/finalRegistration.css}" />
     <style>
-        /* CSS para o modal (popup) */
         .modal {
-            display: block; /* Exibe o modal imediatamente */
+            display: block;
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -30,7 +29,7 @@
 <div class="modal">
     <div class="modal-content">
         <p th:text="${popupMessage}">Mensagem</p>
-        <button onclick="window.location.href='/'">OK</button>
+        <button onclick="window.location.href='/'" th:text="#{label.ok}">OK</button>
     </div>
 </div>
 </body>

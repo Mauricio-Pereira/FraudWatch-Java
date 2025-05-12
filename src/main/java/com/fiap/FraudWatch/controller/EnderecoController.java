@@ -227,7 +227,23 @@ public class EnderecoController {
     }
 
 
-
+    @Operation(summary = "Buscar dados de endereço via CEP (sem salvar)")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Dados do CEP retornados com sucesso"),
+            @ApiResponse(responseCode = "404", description = "CEP não encontrado")
+    })
+    @GetMapping("/cep")
+    public ResponseEntity<EnderecoResponseDTO> buscarEnderecoPorCep(@RequestParam String cep) {
+        try {
+            Future<ViaCepResponse> futureViaCep = enderecoServiceAsync.ObterEnderecoPorCepAsync(cep);
+            EnderecoRequest fakeRequest = new EnderecoRequest(cep, "", "", "", "", "", "", "");
+            Endereco endereco = enderecoService.RequestToEndereco(fakeRequest, futureViaCep);
+            EnderecoResponseDTO response = enderecoService.EnderecoToResponseDTO(endereco);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
 
 }

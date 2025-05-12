@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
 <footer>
-    <div class="container">
-        <p>&copy; 2025 FraudWatch. Todos os direitos reservados.</p>
+    <div class="container-footer">
+        <p th:text="#{footer.copyright}">&copy; 2025 FraudWatch. Todos os direitos reservados.</p>
     </div>
 </footer>
 </body>
