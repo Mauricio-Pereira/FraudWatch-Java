@@ -12,12 +12,14 @@ import com.fiap.FraudWatch.model.Usuario;
 import com.fiap.FraudWatch.repository.EnderecoRepository;
 import com.fiap.FraudWatch.repository.TipoUsuarioRepository;
 import com.fiap.FraudWatch.repository.UsuarioRepository;
+import com.fiap.FraudWatch.service.messaging.UsuarioProducer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +40,10 @@ public class UsuarioService {
     private final TipoUsuarioRepository tipoUsuarioRepository;
     @Autowired
     private final EnderecoRepository enderecoRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private UsuarioProducer usuarioProducer;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -46,12 +52,14 @@ public class UsuarioService {
                           EnderecoService enderecoService,
                           EnderecoServiceAsync enderecoServiceAsync,
                           TipoUsuarioRepository tipoUsuarioRepository,
-                          EnderecoRepository enderecoRepository) {
+                          EnderecoRepository enderecoRepository,
+                          UsuarioProducer usuarioProducer) {
         this.usuarioRepository = usuarioRepository;
         this.enderecoService = enderecoService;
         this.enderecoServiceAsync = enderecoServiceAsync;
         this.tipoUsuarioRepository = tipoUsuarioRepository;
         this.enderecoRepository = enderecoRepository;
+        this.usuarioProducer = usuarioProducer;
     }
 
     public Usuario RequestToUsuario(UsuarioRequest usuarioRequest,
@@ -68,7 +76,7 @@ public class UsuarioService {
         usuario.setNome(usuarioRequest.nome());
         usuario.setSobrenome(usuarioRequest.sobrenome());
         usuario.setEmail(usuarioRequest.email());
-        usuario.setSenha(usuarioRequest.senha());
+        usuario.setSenha(passwordEncoder.encode(usuarioRequest.senha()));
         usuario.setCpf(usuarioRequest.cpf());
         usuario.setDataNascimento(usuarioRequest.dataNascimento());
         usuario.setTelefone(usuarioRequest.telefone());
@@ -143,7 +151,9 @@ public class UsuarioService {
         usuarioExistente.setNome(usuarioRequest.nome());
         usuarioExistente.setSobrenome(usuarioRequest.sobrenome());
         usuarioExistente.setEmail(usuarioRequest.email());
-        usuarioExistente.setSenha(usuarioRequest.senha());
+        if (usuarioRequest.senha() != null && !usuarioRequest.senha().isBlank()) {
+            usuarioExistente.setSenha(passwordEncoder.encode(usuarioRequest.senha()));
+        }
         usuarioExistente.setCpf(usuarioRequest.cpf());
         usuarioExistente.setDataNascimento(usuarioRequest.dataNascimento());
         usuarioExistente.setTelefone(usuarioRequest.telefone());
@@ -161,10 +171,12 @@ public class UsuarioService {
                         enderecoServiceAsync.ObterEnderecoPorCepAsync(
                                 enderecoRequest.cep())));
 
-        // O campo DataCadastro não será alterado
 
-        // Retornar o usuário atualizado
-        return usuarioRepository.save(usuarioExistente);
+        Usuario atualizado = usuarioRepository.save(usuarioExistente);
+        // Envia evento de atualização
+        UsuarioResponse response = usuarioToResponse(atualizado, Link.of("/usuarios/" + atualizado.getId()));
+        usuarioProducer.enviarEventoUsuario(response, "atualizado");
+        return atualizado;
     }
 
     @Transactional // Anotação para controlar a transação
@@ -209,7 +221,11 @@ public class UsuarioService {
 
             // Definir os valores dos parâmetros de entrada
             storedProcedure.setParameter("p_email", usuarioRequest.email());
-            storedProcedure.setParameter("p_senha", usuarioRequest.senha());
+            String senha = usuarioRequest.senha();
+            if (!senha.startsWith("$2a$")) {
+                senha = passwordEncoder.encode(senha);
+            }
+            storedProcedure.setParameter("p_senha", senha);
             storedProcedure.setParameter("p_nome", usuarioRequest.nome());
             storedProcedure.setParameter("p_sobrenome",
                     usuarioRequest.sobrenome());
@@ -249,7 +265,10 @@ public class UsuarioService {
                                             idTipoUsuario));
             usuario.setTipoUsuario(tipoUsuario);
 
-            return usuario; // Retorna o usuário cadastrado
+
+            UsuarioResponse response = usuarioToResponse(usuario, Link.of("/usuarios/" + usuario.getId()));
+            usuarioProducer.enviarEventoUsuario(response, "criado");
+            return usuario;
         } catch (Exception e) {
             // Caso ocorra uma exceção, o Spring automaticamente reverterá a transação
             // e podemos excluir o endereço se ele foi criado
@@ -324,7 +343,11 @@ public class UsuarioService {
             // Definir os valores dos parâmetros de entrada
             storedProcedure.setParameter("p_id_usuario", id);
             storedProcedure.setParameter("p_email", usuarioRequest.email());
-            storedProcedure.setParameter("p_senha", usuarioRequest.senha());
+            String senha = usuarioRequest.senha();
+            if (!senha.startsWith("$2a$")) {
+                senha = passwordEncoder.encode(senha);
+            }
+            storedProcedure.setParameter("p_senha", senha);
             storedProcedure.setParameter("p_nome", usuarioRequest.nome());
             storedProcedure.setParameter("p_sobrenome", usuarioRequest.sobrenome());
             storedProcedure.setParameter("p_cpf", usuarioRequest.cpf());
@@ -339,6 +362,7 @@ public class UsuarioService {
             // 6. Buscar o usuário atualizado
             Usuario usuarioAtualizado = usuarioRepository.findById(id).get();
             // 7. Retornar o usuário atualizado
+
             return usuarioAtualizado;
 
         } catch (Exception e) {

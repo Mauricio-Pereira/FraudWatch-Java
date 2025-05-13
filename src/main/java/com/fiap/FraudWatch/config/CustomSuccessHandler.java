@@ -23,14 +23,11 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication)
             throws IOException, ServletException {
 
-        Usuario usuario = (Usuario) authentication.getPrincipal();
-        if ("Administrador".equalsIgnoreCase(usuario.getTipoUsuario().getDescricao())) {
+        if (authentication.getAuthorities().stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
             response.sendRedirect("/users");
         } else {
             response.sendRedirect("/home");
         }
-
-
-
     }
 }

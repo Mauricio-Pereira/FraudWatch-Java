@@ -231,13 +231,11 @@ public class UsuarioController {
     @DeleteMapping("/procedure/{id}")
     public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {
         try {
-            // Chama o serviço para deletar o usuário e o endereço
             usuarioService.deleteUsuarioWithProcedure(id);
 
             return ResponseEntity.ok().build(); // Retorna 200 OK
         } catch (RuntimeException e) {
-            // Retorna uma resposta com erro, se algo falhar
-            return ResponseEntity.badRequest().build(); // Aqui você pode personalizar a resposta de erro
+            return ResponseEntity.badRequest().build();
         }
     }
 }

@@ -4,72 +4,172 @@
     <meta charset="UTF-8">
     <title th:text="#{label.header.title}">FraudWatch</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 <div class="main-container">
     <div class="content-container">
+
         <!-- Card com logo e chamada -->
         <div class="big-card">
-            <img src="/images/fraudwatch-logo.png" alt="Logo" class="big-card-image" />
-            <p class="big-card-text" th:text="#{label.card.description}">Tenha acesso a todos os procedimentos odontológicos e evite fraudes!</p>
+            <img src="/images/fraudwatch-logo.png" alt="Logo" class="big-card-image"/>
+            <p class="big-card-text" th:text="#{label.card.description}">Tenha acesso a todos os procedimentos
+                odontológicos e evite fraudes!</p>
             <a href="#" class="big-card-button" th:text="#{label.card.cta}">Ver Procedimentos</a>
         </div>
 
-        <!-- Procedimentos Recentes -->
-        <h2 class="section-title" th:text="#{label.last.procedures}">Últimos Procedimentos</h2>
-        <div class="horizontal-scroll">
-            <div class="card">
-                <img src="/images/clareamento.png" alt="Clareamento" class="card-image" />
-                <p class="card-text">Clareamento Dental</p>
+        <!-- Estatísticas Rápidas -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <p class="stat-number">+230</p>
+                <p class="stat-label">Procedimentos</p>
             </div>
-            <div class="card">
-                <img src="/images/implante.png" alt="Implante" class="card-image" />
-                <p class="card-text">Implante Dentário</p>
+            <div class="stat-card">
+                <p class="stat-number">98%</p>
+                <p class="stat-label">Análises Confiáveis</p>
             </div>
-            <div class="card">
-                <img src="/images/ortodontia.png" alt="Ortodontia" class="card-image" />
-                <p class="card-text">Ortodontia</p>
+            <div class="stat-card">
+                <p class="stat-number">24h</p>
+                <p class="stat-label">Detecção de Fraude</p>
             </div>
         </div>
 
+        <!-- Procedimentos Recentes -->
+        <h2 class="section-title" th:text="#{label.last.procedures}">Procedimentos Recentes</h2>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/clareamento.png" alt="Clareamento"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Clareamento Dental</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/implante.png" alt="Implante"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Implante Dentário</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/ortodontia.png" alt="Ortodontia"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Ortodontia</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/restauracao.png" alt="Restauração"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Restauração Dentária</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/extracao-siso.png" alt="Extração de Siso"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Extração de Siso</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/limpeza.png" alt="Limpeza"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Limpeza e Profilaxia</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/canal.png" alt="Canal"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Tratamento de Canal</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/facetas.png" alt="Facetas"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Facetas de Porcelana</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/proteses.png" alt="Próteses"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Próteses Dentárias</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="/images/periodontia.png" alt="Periodontia"  class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text">Tratamento de Gengiva</p>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+
         <!-- Dicas -->
-        <h2 class="section-title" th:text="#{label.tips.title}">Dicas para evitar fraudes em planos odontológicos</h2>
-        <p class="paragraph" th:text="#{label.tips.intro}">Fraudes em planos odontológicos podem causar grandes prejuízos. Confira algumas dicas para se proteger:</p>
-        <div class="tip-container">
-            <img src="/images/apoiadores-logo.png" alt="Apoiadores" class="tip-image" />
-            <p class="tip-text" th:text="#{label.tip.1}">Verifique a credibilidade dos apoiadores</p>
+        <h2 class="section-title" th:text="#{label.tips.title}">Dicas para evitar fraudes</h2>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <img src="/images/apoiadores-logo.png" alt="Apoiadores" class="tip-image"/>
+                <p class="tip-text" th:text="#{label.tip.1}">Verifique a credibilidade dos apoiadores</p>
+            </div>
+            <div class="tip-card">
+                <img src="/images/historico-sinistros-logo.png" alt="Histórico" class="tip-image"/>
+                <p class="tip-text" th:text="#{label.tip.2}">Mantenha registros detalhados.</p>
+            </div>
+            <div class="tip-card">
+                <img src="/images/cobrancas-logo.png" alt="Cobranças" class="tip-image"/>
+                <p class="tip-text" th:text="#{label.tip.3}">Cuidado com cobranças fora do padrão</p>
+            </div>
         </div>
-        <div class="tip-container">
-            <img src="/images/historico-sinistros-logo.png" alt="Histórico" class="tip-image" />
-            <p class="tip-text" th:text="#{label.tip.2}">Analise seu histórico de sinistros e mantenha registros detalhados.</p>
+
+        <!-- Seção IA -->
+        <div class="big-card ai-highlight">
+            <p class="big-card-text">Nosso sistema conta com análise assistida por IA para identificar padrões suspeitos
+                em segundos.</p>
+            <a href="#" class="big-card-button">Conheça a Inteligência Artificial</a>
         </div>
-        <div class="tip-container">
-            <img src="/images/cobrancas-logo.png" alt="Cobranças" class="tip-image" />
-            <p class="tip-text" th:text="#{label.tip.3}">Fique atento a cobranças fora do padrão e a procedimentos não autorizados.</p>
-        </div>
+
     </div>
 
     <!-- Rodapé -->
     <div class="bottom-tab">
         <div class="tab-item">
-            <img src="/images/home-icon.png" alt="Home" class="tab-icon" />
+            <img src="/images/home-icon.png" alt="Home" class="tab-icon"/>
             <p class="tab-text" th:text="#{label.footer.home}">Home</p>
         </div>
         <div class="tab-item">
-            <img src="/images/procedures-icon.png" alt="Procedimentos" class="tab-icon" />
+            <img src="/images/procedures-icon.png" alt="Procedimentos" class="tab-icon"/>
             <p class="tab-text" th:text="#{label.footer.procedures}">Procedimentos</p>
         </div>
         <div class="tab-item">
-            <img src="/images/profile-icon.png" alt="Perfil" class="tab-icon" />
+            <img src="/images/profile-icon.png" alt="Perfil" class="tab-icon"/>
             <p class="tab-text" th:text="#{label.footer.profile}">Perfil</p>
         </div>
         <div class="tab-item">
-            <img src="/images/alert-icon.png" alt="Proteja-se" class="tab-icon" />
+            <img src="/images/alert-icon.png" alt="Proteja-se" class="tab-icon"/>
             <p class="tab-text" th:text="#{label.footer.protect}">Proteja-se</p>
         </div>
     </div>
     <div th:replace="~{fragments/footer :: footer}"></div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.mySwiper', {
+        slidesPerView: 7,
+        spaceBetween: 20,
+        loop: true,
+        freeMode: true,
+        parallax: true,
+        speed: 3000,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
 </body>
 </html>

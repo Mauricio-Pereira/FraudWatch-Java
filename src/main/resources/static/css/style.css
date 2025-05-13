@@ -482,8 +482,10 @@ th {
 }
 
 .btn-group {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    text-align: right;
+    text-align: center;
     margin-top: 1rem;
 }
 
@@ -552,34 +554,37 @@ th {
     color: #333333;
 }
 
-.horizontal-scroll {
-    display: flex;
-    overflow-x: auto;
-    gap: 16px;
-    padding-bottom: 8px;
-    margin-bottom: 24px;
-}
-
 .card {
     background-color: #98C1FF;
-    border-radius: 8px;
-    padding: 16px;
-    width: 120px;
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
     text-align: center;
     flex-shrink: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
 }
 
 .card-image {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .card-text {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bold;
     color: #333333;
 }
+
+
+
 
 .paragraph {
     font-size: 14px;
@@ -723,4 +728,105 @@ footer {
     font-size: 14px;
     color: #ffffff;
     margin: 0;
+}
+
+/* Estatísticas */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 120px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    max-width: 150px;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0B1E51;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Grid de Dicas */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.tip-card {
+    background-color: #0B1E51;
+    color: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.tip-card .tip-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.tip-card .tip-text {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* Destaque IA */
+.ai-highlight {
+    background-color: #f9f9f9;
+    border-left: 6px solid #0B1E51;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.ai-highlight .big-card-text {
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+/* Ajustes gerais */
+.card-image, .tip-image, .big-card-image {
+    width: 100px !important;
+    height: 100px !important;
+}
+
+
+.swiper-container {
+    width: 100%;
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    width: 190px;
+    height: 100%;
+    transition-timing-function: linear !important; /* movimento contínuo */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #0B1E51;
 }

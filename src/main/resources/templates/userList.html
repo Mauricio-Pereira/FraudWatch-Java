@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{label.users.title}">Usuários Cadastrados</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
@@ -30,25 +30,30 @@
                 <button class="edit-button"
                         th:attr="data-id=${usuario.id}"
                         onclick="openEditModal(this.getAttribute('data-id'))"
-                        th:text="#{label.edit}">Editar</button>
+                        th:text="#{label.edit}">Editar
+                </button>
 
                 <button class="delete-button"
                         th:attr="data-id=${usuario.id}"
                         onclick="deleteUsuario(this)"
-                        th:text="#{label.delete}">Deletar</button>
+                        th:text="#{label.delete}">Deletar
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
 
     <div class="button-container">
-        <a th:href="@{'/users?page=' + ${usuariosPage.number}}" class="update-button" th:text="#{label.refresh.list}">Atualizar Lista</a>
+        <a th:href="@{'/users?page=' + ${usuariosPage.number}}" class="update-button" th:text="#{label.refresh.list}">Atualizar
+            Lista</a>
     </div>
 
     <div class="pagination">
-        <a th:if="${usuariosPage.hasPrevious()}" th:href="@{/users(page=${usuariosPage.number - 1})}" th:text="#{label.previous}">Anterior</a>
+        <a th:if="${usuariosPage.hasPrevious()}" th:href="@{/users(page=${usuariosPage.number - 1})}"
+           th:text="#{label.previous}">Anterior</a>
         <span th:text="#{label.page} + ' ' + (${usuariosPage.number} + 1) + ' ' + #{label.of} + ' ' + ${usuariosPage.totalPages}"></span>
-        <a th:if="${usuariosPage.hasNext()}" th:href="@{/users(page=${usuariosPage.number + 1})}" th:text="#{label.next}">Próxima</a>
+        <a th:if="${usuariosPage.hasNext()}" th:href="@{/users(page=${usuariosPage.number + 1})}"
+           th:text="#{label.next}">Próxima</a>
     </div>
 </div>
 
@@ -59,67 +64,110 @@
             <div class="user-column">
                 <h4>Dados do Usuário</h4>
                 <label for="editNome">Nome:</label>
-                <input type="text" id="editNome" />
+                <input type="text" id="editNome"/>
 
                 <label for="editSobrenome">Sobrenome:</label>
-                <input type="text" id="editSobrenome" />
+                <input type="text" id="editSobrenome"/>
 
                 <label for="editEmail">Email:</label>
-                <input type="text" id="editEmail" />
+                <input type="text" id="editEmail"/>
 
                 <label for="editSenha">Senha:</label>
-                <input type="password" id="editSenha" />
+                <div style="position: relative;">
+                    <input type="password" id="editSenha" placeholder="Digite se quiser nova senha" style="padding-right: 30px;" />
+                    <span id="toggleSenha" onclick="toggleSenhaVisibilidade()"
+                          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+                </div>
+                <div id="editSenhaFeedback" style="font-size: 0.9em; margin-top: 5px;"></div>
+
 
                 <label for="editCpf">CPF:</label>
-                <input type="text" id="editCpf" />
+                <input type="text" id="editCpf"/>
 
                 <label for="editDataNascimento">Data de Nascimento:</label>
-                <input type="date" id="editDataNascimento" />
+                <input type="date" id="editDataNascimento"/>
 
                 <label for="editTelefone">Telefone:</label>
-                <input type="text" id="editTelefone" />
+                <input type="text" id="editTelefone"/>
             </div>
 
             <div class="address-column">
                 <h4>Endereço</h4>
                 <label for="editCep">CEP:</label>
-                <input type="text" id="editCep" />
+                <input type="text" id="editCep"/>
 
                 <label for="editLogradouro">Logradouro:</label>
-                <input type="text" id="editLogradouro" />
+                <input type="text" id="editLogradouro"/>
 
                 <label for="editBairro">Bairro:</label>
-                <input type="text" id="editBairro" />
+                <input type="text" id="editBairro"/>
 
                 <label for="editCidade">Cidade:</label>
-                <input type="text" id="editCidade" />
+                <input type="text" id="editCidade"/>
 
                 <label for="editEstado">Estado:</label>
-                <input type="text" id="editEstado" />
+                <input type="text" id="editEstado"/>
 
                 <label for="editRegiao">Região:</label>
-                <input type="text" id="editRegiao" />
+                <input type="text" id="editRegiao"/>
 
                 <label for="editNumero">Número:</label>
-                <input type="text" id="editNumero" />
+                <input type="text" id="editNumero"/>
 
                 <label for="editComplemento">Complemento:</label>
-                <input type="text" id="editComplemento" />
+                <input type="text" id="editComplemento"/>
             </div>
 
-            <div class="btn-group">
-                <button type="button" onclick="saveEdit()">Salvar</button>
-                <button type="button" onclick="closeEditModal()">Cancelar</button>
-            </div>
 
-            <input type="hidden" id="editUserId" />
-            <input type="hidden" id="editTipoUsuarioId" />
+            <input type="hidden" id="editUserId"/>
+            <input type="hidden" id="editTipoUsuarioId"/>
         </form>
-
+        <div class="btn-group">
+            <button type="button" onclick="saveEdit()">Salvar</button>
+            <button type="button" onclick="closeEditModal()">Cancelar</button>
+        </div>
     </div>
+
 </div>
 <div th:replace="~{fragments/footer :: footer}"></div>
 <script>
+    function criarSpan(texto, valido) {
+        const span = document.createElement("span");
+        span.textContent = texto;
+        span.style.color = valido ? "green" : "red";
+        return span;
+    }
+
+    function validarEditSenha() {
+        const senha = document.getElementById('editSenha').value;
+        const feedback = document.getElementById('editSenhaFeedback');
+        feedback.innerHTML = "";
+
+        if (senha.length === 0) {
+            return; // não exibe nada se o campo estiver vazio
+        }
+
+        const criterios = [
+            { condicao: senha.length >= 8, texto: "✔ Mín. 8" },
+            { condicao: /[A-Z]/.test(senha), texto: "✔ 1 MAIÚS." },
+            { condicao: /[a-z]/.test(senha), texto: "✔ 1 minús." },
+            { condicao: /[0-9]/.test(senha), texto: "✔ 1 número" },
+            { condicao: /[@#$%^&+=!]/.test(senha), texto: "✔ 1 caract. especial" },
+            { condicao: !/\s/.test(senha), texto: "✔ Sem espaços" }
+        ];
+
+        criterios.forEach((criterio, index) => {
+            const span = criarSpan(criterio.texto, criterio.condicao);
+            feedback.appendChild(span);
+            if (index < criterios.length - 1) {
+                feedback.appendChild(document.createTextNode(" | "));
+            }
+        });
+    }
+
+    document.getElementById("editSenha").addEventListener("input", validarEditSenha);
+
+
     // Chama o endpoint GET /usuario/{id} para buscar todos os dad  os
     function openEditModal(userId) {
         // Mapeia o texto para número
@@ -139,25 +187,26 @@
             .then(data => {
                 // Preenche campos do modal com os dados do JSON
                 document.getElementById("editUserId").value = data.id;
-                document.getElementById("editNome").value   = data.nome || "";
+                document.getElementById("editNome").value = data.nome || "";
                 document.getElementById("editSobrenome").value = data.sobrenome || "";
-                document.getElementById("editEmail").value  = data.email || "";
-                document.getElementById("editSenha").value  = data.senha || "";
-                document.getElementById("editCpf").value    = data.cpf || "";
+                document.getElementById("editEmail").value = data.email || "";
+                document.getElementById("editSenha").value = "";
+                document.getElementById("editSenhaFeedback").innerHTML = ""; // Adicione isso aqui
+                document.getElementById("editCpf").value = data.cpf || "";
                 document.getElementById("editDataNascimento").value = data.dataNascimento || "";
                 document.getElementById("editTelefone").value = data.telefone || "";
                 document.getElementById("editTipoUsuarioId").value =
                     userTypeMap[data.tipoUsuario] || 1; // se não achar, assume 1
 
                 if (data.endereco) {
-                    document.getElementById("editCep").value         = data.endereco.cep || "";
-                    document.getElementById("editLogradouro").value  = data.endereco.logradouro || "";
-                    document.getElementById("editBairro").value      = data.endereco.bairro || "";
-                    document.getElementById("editCidade").value      = data.endereco.cidade || "";
-                    document.getElementById("editEstado").value      = data.endereco.estado || "";
-                    document.getElementById("editRegiao").value      = data.endereco.regiao || "";
+                    document.getElementById("editCep").value = data.endereco.cep || "";
+                    document.getElementById("editLogradouro").value = data.endereco.logradouro || "";
+                    document.getElementById("editBairro").value = data.endereco.bairro || "";
+                    document.getElementById("editCidade").value = data.endereco.cidade || "";
+                    document.getElementById("editEstado").value = data.endereco.estado || "";
+                    document.getElementById("editRegiao").value = data.endereco.regiao || "";
                     document.getElementById("editComplemento").value = data.endereco.complemento || "";
-                    document.getElementById("editNumero").value      = data.endereco.numero || "";
+                    document.getElementById("editNumero").value = data.endereco.numero || "";
                 }
 
                 // Exibe o modal
@@ -179,30 +228,30 @@
         // Monta o JSON para enviar
         const updatedUser = {
             id: parseInt(userId),
-            nome:   document.getElementById("editNome").value,
+            nome: document.getElementById("editNome").value,
             sobrenome: document.getElementById("editSobrenome").value,
-            email:  document.getElementById("editEmail").value,
-            senha:  document.getElementById("editSenha").value,
-            cpf:    document.getElementById("editCpf").value,
+            email: document.getElementById("editEmail").value,
+            senha: document.getElementById("editSenha").value,
+            cpf: document.getElementById("editCpf").value,
             dataNascimento: document.getElementById("editDataNascimento").value,
             telefone: document.getElementById("editTelefone").value,
             tipoUsuarioid: parseInt(document.getElementById("editTipoUsuarioId").value),
             // Preenche o endereço
             endereco: {
-                cep:         document.getElementById("editCep").value,
-                logradouro:  document.getElementById("editLogradouro").value,
-                bairro:      document.getElementById("editBairro").value,
-                cidade:      document.getElementById("editCidade").value,
-                estado:      document.getElementById("editEstado").value,
-                regiao:      document.getElementById("editRegiao").value,
+                cep: document.getElementById("editCep").value,
+                logradouro: document.getElementById("editLogradouro").value,
+                bairro: document.getElementById("editBairro").value,
+                cidade: document.getElementById("editCidade").value,
+                estado: document.getElementById("editEstado").value,
+                regiao: document.getElementById("editRegiao").value,
                 complemento: document.getElementById("editComplemento").value,
-                numero:      document.getElementById("editNumero").value
+                numero: document.getElementById("editNumero").value
             }
         };
 
         fetch('/usuario/' + userId, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(updatedUser)
         })
             .then(response => {
@@ -231,7 +280,9 @@
             })
                 .then(response => {
                     if (!response.ok) {
-                        return response.text().then(text => { throw new Error(text); });
+                        return response.text().then(text => {
+                            throw new Error(text);
+                        });
                     }
                     alert("Usuário excluído com sucesso.");
                     location.reload();
@@ -241,6 +292,20 @@
                 });
         }
     }
+
+    function toggleSenhaVisibilidade() {
+        const input = document.getElementById("editSenha");
+        const icon = document.getElementById("toggleSenha");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.textContent = "🙈";
+        } else {
+            input.type = "password";
+            icon.textContent = "👁️";
+        }
+    }
+
 </script>
 </body>
 </html>
