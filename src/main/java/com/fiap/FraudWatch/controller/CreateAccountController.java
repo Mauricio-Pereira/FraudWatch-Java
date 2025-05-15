@@ -48,7 +48,6 @@ public class CreateAccountController {
                 // endereço com valores vazios
         );
         model.addAttribute("usuarioRequest", usuarioRequest);
-        System.out.println(usuarioRequest);
         return "registrationForm";
     }
 

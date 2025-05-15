@@ -14,8 +14,7 @@
         <!-- Card com logo e chamada -->
         <div class="big-card">
             <img src="/images/fraudwatch-logo.png" alt="Logo" class="big-card-image"/>
-            <p class="big-card-text" th:text="#{label.card.description}">Tenha acesso a todos os procedimentos
-                odontológicos e evite fraudes!</p>
+            <p class="big-card-text" th:text="#{label.card.description}">Tenha acesso a todos os procedimentos odontológicos e evite fraudes!</p>
             <a href="#" class="big-card-button" th:text="#{label.card.cta}">Ver Procedimentos</a>
         </div>
 
@@ -23,15 +22,15 @@
         <div class="stats-container">
             <div class="stat-card">
                 <p class="stat-number">+230</p>
-                <p class="stat-label">Procedimentos</p>
+                <p class="stat-label" th:text="#{label.stat.procedures}">Procedimentos</p>
             </div>
             <div class="stat-card">
                 <p class="stat-number">98%</p>
-                <p class="stat-label">Análises Confiáveis</p>
+                <p class="stat-label" th:text="#{label.stat.reliable.analysis}">Análises Confiáveis</p>
             </div>
             <div class="stat-card">
                 <p class="stat-number">24h</p>
-                <p class="stat-label">Detecção de Fraude</p>
+                <p class="stat-label" th:text="#{label.stat.fraud.detection}">Detecção de Fraude</p>
             </div>
         </div>
 
@@ -41,69 +40,68 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/clareamento.png" alt="Clareamento"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Clareamento Dental</p>
+                        <img src="/images/clareamento.png" alt="Clareamento" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.clareamento}">Clareamento Dental</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/implante.png" alt="Implante"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Implante Dentário</p>
+                        <img src="/images/implante.png" alt="Implante" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.implante}">Implante Dentário</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/ortodontia.png" alt="Ortodontia"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Ortodontia</p>
+                        <img src="/images/ortodontia.png" alt="Ortodontia" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.ortodontia}">Ortodontia</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/restauracao.png" alt="Restauração"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Restauração Dentária</p>
+                        <img src="/images/restauracao.png" alt="Restauração" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.restauracao}">Restauração Dentária</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/extracao-siso.png" alt="Extração de Siso"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Extração de Siso</p>
+                        <img src="/images/extracao-siso.png" alt="Extração de Siso" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.extracao}">Extração de Siso</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/limpeza.png" alt="Limpeza"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Limpeza e Profilaxia</p>
+                        <img src="/images/limpeza.png" alt="Limpeza" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.limpeza}">Limpeza e Profilaxia</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/canal.png" alt="Canal"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Tratamento de Canal</p>
+                        <img src="/images/canal.png" alt="Canal" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.canal}">Tratamento de Canal</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/facetas.png" alt="Facetas"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Facetas de Porcelana</p>
+                        <img src="/images/facetas.png" alt="Facetas" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.facetas}">Facetas de Porcelana</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/proteses.png" alt="Próteses"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Próteses Dentárias</p>
+                        <img src="/images/proteses.png" alt="Próteses" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.proteses}">Próteses Dentárias</p>
                     </div>
                 </div>
                 <div class="swiper-slide">
                     <div class="card">
-                        <img src="/images/periodontia.png" alt="Periodontia"  class="card-image" data-swiper-parallax="-30%"/>
-                        <p class="card-text">Tratamento de Gengiva</p>
+                        <img src="/images/periodontia.png" alt="Periodontia" class="card-image" data-swiper-parallax="-30%"/>
+                        <p class="card-text" th:text="#{procedure.periodontia}">Tratamento de Gengiva</p>
                     </div>
                 </div>
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
-
 
         <!-- Dicas -->
         <h2 class="section-title" th:text="#{label.tips.title}">Dicas para evitar fraudes</h2>
@@ -124,9 +122,8 @@
 
         <!-- Seção IA -->
         <div class="big-card ai-highlight">
-            <p class="big-card-text">Nosso sistema conta com análise assistida por IA para identificar padrões suspeitos
-                em segundos.</p>
-            <a href="#" class="big-card-button">Conheça a Inteligência Artificial</a>
+            <p class="big-card-text" th:text="#{label.card.ia.description}">Nosso sistema conta com análise assistida por IA para identificar padrões suspeitos em segundos.</p>
+            <a href="#" class="big-card-button" th:text="#{label.card.ia.cta}">Conheça a Inteligência Artificial</a>
         </div>
 
     </div>

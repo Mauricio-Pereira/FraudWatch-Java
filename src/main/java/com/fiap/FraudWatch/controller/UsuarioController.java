@@ -5,6 +5,7 @@ import com.fiap.FraudWatch.dto.usuarioDto.UsuarioLoginRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponseDTO;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponse;
+import com.fiap.FraudWatch.dto.usuarioDto.UsuarioUpdateRequest;
 import com.fiap.FraudWatch.model.Usuario;
 import com.fiap.FraudWatch.repository.UsuarioRepository;
 import com.fiap.FraudWatch.service.UsuarioService;
@@ -134,7 +135,8 @@ public class UsuarioController {
             @ApiResponse(responseCode = "400", description = "Erro na requisição")
     })
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> UpdateUsuarioById(@PathVariable Long id, @Valid @RequestBody UsuarioRequest usuarioRequest){
+    public ResponseEntity<UsuarioResponseDTO> UpdateUsuarioById(@PathVariable Long id, @Valid @RequestBody
+    UsuarioUpdateRequest usuarioRequest){
         Optional<Usuario> usuarioSalvo = usuarioRepository.findById(id);
         if (usuarioSalvo.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

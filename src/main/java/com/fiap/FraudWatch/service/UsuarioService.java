@@ -4,6 +4,7 @@ import com.fiap.FraudWatch.dto.enderecoDto.EnderecoRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioRequest;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponse;
 import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponseDTO;
+import com.fiap.FraudWatch.dto.usuarioDto.UsuarioUpdateRequest;
 import com.fiap.FraudWatch.exception.CpfJaCadastradoException;
 import com.fiap.FraudWatch.exception.EmailJaCadastradoException;
 import com.fiap.FraudWatch.model.Endereco;
@@ -127,7 +128,7 @@ public class UsuarioService {
         );
     }
 
-    public Usuario UpdateUsuario(Long id, UsuarioRequest usuarioRequest,
+    public Usuario UpdateUsuario(Long id, UsuarioUpdateRequest usuarioRequest,
                                  EnderecoRequest enderecoRequest) {
         // Buscar o usuário existente no banco de dados
         Usuario usuarioExistente = usuarioRepository.findById(id)
