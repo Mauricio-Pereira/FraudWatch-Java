@@ -373,6 +373,27 @@ endpoints da API conforme descrito anteriormente no `README.md`.
 ![Postman](/documentation/POSTMAN_RUN_PT2.png)
 
 
+### Como executar o projeto WEB via docker
+#### Passo 1: Clonar o Repositório
+Clone o repositório do projeto para sua máquina local:
+```sh
+git clone https://github.com/Mauricio-Pereira/FraudWatch.git
+cd FraudWatch
+```
+
+#### Passo 2: Construir o container Docker
+```sh
+docker-compose up --build
+```
+
+#### Passo 3: Acessar a Aplicação
+A aplicação estará disponível em `http://localhost:8080`.
+
+#### OBS.: O idioma é dependente do navegador, caso o navegador esteja em inglês, a aplicação estará em inglês, caso esteja em português, a aplicação estará em português.
+#### Caso queira rodar localmente sem o docker, é necessário uma intância do RabbitMQ rodando na porta 5672 para que a aplicação funcione corretamente.
+Quando rodar localmente, a aplicação estará disponível em `http://localhost:8080` e nesse caso o idioma da aplicação será definido pelos botões de idioma disponíveis na aplicação.
+
+ 
 
 
 
