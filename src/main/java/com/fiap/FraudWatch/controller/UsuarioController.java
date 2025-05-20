@@ -21,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
     @Autowired
     private UsuarioRepository usuarioRepository;
-    private Pageable pageable = PageRequest.of(0,400, Sort.by("nome").ascending());
+    private Pageable pageable = PageRequest.of(0,10, Sort.by("nome").ascending());
 
     @Operation(summary = "Criar um usuario")
     @ApiResponses(value = {
@@ -90,24 +91,25 @@ public class UsuarioController {
             @ApiResponse(responseCode = "400", description = "Erro na requisição")
     })
     @GetMapping("/page/{page}")
-    public ResponseEntity<List<UsuarioResponse>> GetAllUsuarios(@PathVariable int page){
+    public ResponseEntity<Page<UsuarioResponse>> GetAllUsuarios(@PathVariable int page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("nome").ascending()); // ← 10 por página
+
         Page<Usuario> usuarioPage = usuarioRepository.findAll(pageable);
         if (usuarioPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        List<UsuarioResponse> usuarioResponseList = new ArrayList<>();
-        for (Usuario usuario : usuarioPage) {
+
+        Page<UsuarioResponse> usuarioResponsePage = usuarioPage.map(usuario -> {
             UsuarioResponseDTO usuarioResponseDTO = usuarioService.usuarioToResponse(usuario);
-            UsuarioResponse usuarioResponse = usuarioService.usuarioToResponse(usuario, linkTo(
+            return usuarioService.usuarioToResponse(usuario, linkTo(
                     methodOn(UsuarioController.class)
                             .GetUsuarioById(usuarioResponseDTO.id())
-            ).withSelfRel()
-            );
-            usuarioResponseList.add(usuarioResponse);
+            ).withSelfRel());
+        });
 
-        }
-        return new ResponseEntity<>(usuarioResponseList, HttpStatus.OK);
+        return new ResponseEntity<>(usuarioResponsePage, HttpStatus.OK);
     }
+
 
     @Operation(summary = "Buscar usuario por id")
     @ApiResponses(value = {
@@ -169,17 +171,20 @@ public class UsuarioController {
             @ApiResponse(responseCode = "400", description = "Erro na requisição")
     })
     @PostMapping("/login")
-    public ResponseEntity<UsuarioResponseDTO> Login(@Valid @RequestBody
-                                                    UsuarioLoginRequest usuarioLoginRequest){
+    public ResponseEntity<UsuarioResponseDTO> login(@RequestBody UsuarioLoginRequest usuarioLoginRequest) {
         Optional<Usuario> usuario = usuarioRepository.findByEmail(usuarioLoginRequest.email());
+
         if (usuario.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        if (!usuario.get().getSenha().equals(usuarioLoginRequest.senha())) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(usuarioLoginRequest.senha(), usuario.get().getSenha())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+
         UsuarioResponseDTO usuarioResponse = usuarioService.usuarioToResponse(usuario.get());
-        return new ResponseEntity<>(usuarioResponse, HttpStatus.OK);
+        return ResponseEntity.ok(usuarioResponse);
     }
 
 
@@ -240,4 +245,5 @@ public class UsuarioController {
             return ResponseEntity.badRequest().build();
         }
     }
+
 }

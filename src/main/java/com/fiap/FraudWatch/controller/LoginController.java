@@ -1,17 +1,23 @@
 package com.fiap.FraudWatch.controller;
 
+import com.fiap.FraudWatch.dto.usuarioDto.UsuarioLoginRequest;
+import com.fiap.FraudWatch.dto.usuarioDto.UsuarioResponseDTO;
 import com.fiap.FraudWatch.model.Usuario;
 import com.fiap.FraudWatch.repository.UsuarioRepository;
 import com.fiap.FraudWatch.service.UsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +29,9 @@ public class LoginController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @GetMapping("/")
     public String login(HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -33,4 +42,6 @@ public class LoginController {
 
         return "login"; // se não estiver autenticado, exibe a tela de login
     }
+
+
 }

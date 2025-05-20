@@ -33,7 +33,7 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/actuator/**").hasRole("ADMIN") // 🔒 apenas ADMIN pode acessar
-                        .requestMatchers("/", "/endereco/cep", "/create-account/**", "/css/**", "/images/**").permitAll()
+                        .requestMatchers("/", "/endereco/cep", "/create-account/**", "/css/**", "/images/**","/usuario", "/usuario/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
