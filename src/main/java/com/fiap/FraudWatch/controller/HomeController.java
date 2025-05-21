@@ -39,11 +39,15 @@ public class HomeController {
     private AiService aiService;
 
     @GetMapping("/home")
-    public String home(Model model) {
-        String dica = aiService.gerarDicaSaudeBucal();
+    public String home(HttpServletRequest request, Model model) {
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        Locale locale = (localeResolver != null) ? localeResolver.resolveLocale(request) : request.getLocale();
+        String dica = aiService.gerarDicaSaudeBucal(locale);
         model.addAttribute("mensagem", dica);
         return "home";
     }
+
+
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
@@ -80,4 +84,13 @@ public class HomeController {
                     .body("Erro inesperado ao deletar usuário.");
         }
     }
+
+    @GetMapping("/api/dica")
+    public ResponseEntity<String> novaDica(HttpServletRequest request) {
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        Locale locale = (localeResolver != null) ? localeResolver.resolveLocale(request) : request.getLocale();
+        String dica = aiService.gerarDicaSaudeBucal(locale);
+        return ResponseEntity.ok(dica);
+    }
+
 }

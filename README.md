@@ -316,6 +316,44 @@ Essa tabela resume os endpoints da API FraudWatch, indicando quais operações e
 de requisição em JSON, disponível no Postman.
 
 
+### 🧠 Dica de Saúde Bucal com IA
+
+O projeto conta com integração com **IA local via Ollama**, que gera **dicas de saúde bucal** de forma dinâmica na página inicial.
+
+#### Funcionalidades:
+
+* Ao acessar a tela inicial (`/home`), o sistema exibe automaticamente uma dica gerada por IA.
+* O usuário pode clicar no botão **"Gerar outra dica!"** para solicitar uma nova dica instantaneamente, sem recarregar a página.
+* A dica é exibida no **idioma da interface atual**, podendo ser **Português** ou **Inglês**, conforme o idioma selecionado.
+* A troca de idioma é feita através de botões na parte superior da página, permitindo que o usuário altere o idioma da interface e das dicas geradas.
+* Pode ter um delay de alguns segundos para gerar a dica, dependendo do modelo utilizado e da carga do servidor.
+
+#### Tecnologias utilizadas:
+
+* [Ollama](https://ollama.com) rodando localmente com o modelo `tinyllama` (ou outro de sua escolha)
+* [LangChain4j](https://github.com/langchain4j/langchain4j) para integração com modelos de linguagem
+* Spring Boot + Thymeleaf
+* Suporte a internacionalização com `LocaleResolver`
+
+#### Como usar:
+
+1. Certifique-se de que o serviço `ollama` está em execução e que o modelo (`tinyllama`, `mistral`, etc.) foi carregado:
+
+   ```bash
+   docker exec -it ollama ollama pull tinyllama
+   ```
+
+2. Acesse `/home` para ver a dica inicial.
+
+3. Use os botões no topo da página para trocar entre os idiomas:
+
+   ```
+   /lang?lang=pt
+   /lang?lang=en
+   ```
+
+4. Clique em **"Gerar outra dica!"** para receber uma nova dica da IA no idioma selecionado.
+
 ### Como executar o projeto
 ### Passo a Passo para Rodar o Projeto FraudWatch
 

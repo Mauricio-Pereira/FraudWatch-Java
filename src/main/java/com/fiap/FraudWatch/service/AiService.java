@@ -4,6 +4,8 @@ import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.ollama.OllamaChatModel;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
+
 @Service
 public class AiService {
 
@@ -12,10 +14,15 @@ public class AiService {
     public AiService() {
         this.model = OllamaChatModel.builder()
                 .baseUrl("http://localhost:11434")
-                .modelName("llama3")
+                .modelName("tinyllama")
                 .build();
     }
-    public String gerarDicaSaudeBucal() {
-        return model.generate("Gere uma dica curta sobre saúde bucal. Seja direto e objetivo.");
+    public String gerarDicaSaudeBucal(Locale locale) {
+        String prompt = locale.getLanguage().equals("pt")
+                ? "Me dê uma dica rápida de saúde bucal"
+                : "Give me a quick dental health tip";
+
+        return model.generate(prompt);
     }
+
 }

@@ -123,16 +123,17 @@
         <!-- Seção IA -->
         <div class="big-card ai-highlight">
             <p class="big-card-text" th:text="#{label.card.ia.description}">
-                Nosso sistema conta com análise assistida por IA para identificar padrões suspeitos em segundos.
+                Nosso sistema conta com análise assistida por IA para identificar padrões suspeitos em segundos.<br>
+                Dica gerada pela IA logo abaixo!
             </p>
 
             <!-- Mostra a dica gerada pela IA -->
             <div style="margin-top: 20px;">
-                <p><strong>Dica de Saúde Bucal:</strong></p>
-                <p th:text="${mensagem}" style="font-style: italic; color: #0077cc;"></p>
+                <p th:tesxt="#{label.card.ia.tip.title}"><strong>Dica de Saúde Bucal:</strong></p>
+                <p id="dica" style="font-style: italic; color: #0077cc;" th:text="${mensagem}"></p>
             </div>
 
-            <a href="#" class="big-card-button" th:text="#{label.card.ia.cta}">Conheça a Inteligência Artificial</a>
+            <a href="#" class="big-card-button" th:text="#{label.card.ia.cta}" onclick="gerarNovaDica(event)">Gerar outra dica!</a>
         </div>
 
 
@@ -177,6 +178,16 @@
             prevEl: '.swiper-button-prev',
         },
     });
+</script>
+<script>
+    function gerarNovaDica(event) {
+        event.preventDefault(); // impede navegação padrão do link
+        fetch('/api/dica')
+            .then(response => response.text())
+            .then(dica => {
+                document.getElementById('dica').innerText = dica;
+            });
+    }
 </script>
 </body>
 </html>
