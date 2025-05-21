@@ -2,6 +2,7 @@ package com.fiap.FraudWatch.controller;
 
 import com.fiap.FraudWatch.model.Usuario;
 import com.fiap.FraudWatch.repository.UsuarioRepository;
+import com.fiap.FraudWatch.service.AiService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,14 @@ public class HomeController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private AiService aiService;
 
     @GetMapping("/home")
     public String home(Model model) {
-        model.addAttribute("mensagem", "Olá, Thymeleaf!");
-        return "home"; // Procura um template home.html
+        String dica = aiService.gerarDicaSaudeBucal();
+        model.addAttribute("mensagem", dica);
+        return "home";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
